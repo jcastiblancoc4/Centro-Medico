@@ -58,15 +58,12 @@
                                     <div>
                                     <img src="#" width="200" height="200" style="border: black solid ">
                                     </div>
-                                    
                                     <h4 class="card-title">${paciente.nombre} ${paciente.apellido}</h4>
+                                    <h5 class="card-text" style="">Cedula: ${paciente.cedula}</h5>
                                     <h5 class="card-text" style="">Direccion: ${paciente.direccion}</h5>
                                     <h5 class="card-text" style=>Correo: ${paciente.correo}</h5>
                                     <h5 class="card-text" style="">Celular: ${paciente.celular}</h5>
                                     <h5 class="card-text" style="">Citas pendientes ${paciente.numeroCitas}</h5>
-                                    
-                                   
-                                    
                                     <form action="PacientesCtrl" method="GET" style="display:inline-block">
                                         <input type="hidden" name="id" value="${paciente.id}">
                                         <input type="submit" name="accion" value="editar" class="btn btn-warning btn-sm">       

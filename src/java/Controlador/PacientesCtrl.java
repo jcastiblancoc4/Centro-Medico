@@ -5,12 +5,7 @@
  */
 package Controlador;
 
-
-import ControlDAO.DoctorJDBC;
-import ControlDAO.EspecialidadJDBC;
 import ControlDAO.PacienteJDBC;
-import Modelo.Doctor;
-import Modelo.Especialidad;
 import Modelo.Paciente;
 import java.io.IOException;
 import java.util.List;
@@ -87,7 +82,8 @@ public class PacientesCtrl extends HttpServlet {
         String correo=request.getParameter("correo");
         String celular= request.getParameter("celular");
         String tipoPersona = "paciente";
-        Paciente paciente = new Paciente(nombre, apellido, direccion, correo, celular, tipoPersona);
+        int cedula = Integer.parseInt(request.getParameter("cedula"));
+        Paciente paciente = new Paciente(nombre, apellido, direccion, correo, celular, tipoPersona, cedula);
         PacienteJDBC.instance().insert(paciente);
         response.sendRedirect("PacientesCtrl");   
     }
@@ -107,7 +103,8 @@ public class PacientesCtrl extends HttpServlet {
         String direccion=request.getParameter("direccion");
         String correo=request.getParameter("correo");
         String celular= request.getParameter("celular");
-        Paciente paciente = new Paciente(id, nombre, apellido, direccion, correo, celular);
+        int cedula = Integer.parseInt(request.getParameter("cedula"));
+        Paciente paciente = new Paciente(id, nombre, apellido, direccion, correo, celular, cedula);
         String mensaje = PacienteJDBC.instance().update(paciente);
         request.setAttribute("mensaje", mensaje);  
         response.sendRedirect("PacientesCtrl");

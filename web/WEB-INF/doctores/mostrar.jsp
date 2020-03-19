@@ -62,6 +62,10 @@
             <h3 class="titulo"><%=tipoForm%> Doctor</h3>
             <form action="DoctoresCtrl" method="POST">
                     <div class="form-group item">
+                        <label>Cedula:</label>
+                        <input type="text" class="form-control" name="cedula" value="${doctor.cedula}">
+                    </div>    
+                    <div class="form-group item">
                         <label>Nombre:</label>
                         <input type="text" class="form-control" name="id" value="${doctor.id}" style="display:none">
                         <input type="text" class="form-control" name="nombre" value="${doctor.nombre}">

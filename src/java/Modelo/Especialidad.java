@@ -10,10 +10,10 @@ public class Especialidad {
 private int id;
 private String nombre;
 private String descripcion;
-private double costo_consulta;
+private int costo_consulta;
 private Time duracion_consulta; 
 
-    public Especialidad(int id, String nombre, String descripcion, double costo_consulta, String duracion_consulta) {
+    public Especialidad(int id, String nombre, String descripcion, int costo_consulta, String duracion_consulta) {
         this.id = id;
         this.nombre = nombre;
 	this.descripcion = descripcion;
@@ -22,7 +22,7 @@ private Time duracion_consulta;
     }
 
  
- public Especialidad(String nombre, String descripcion, double costo_consulta, String duracion_consulta) {
+ public Especialidad(String nombre, String descripcion, int costo_consulta, String duracion_consulta) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.costo_consulta = costo_consulta;
@@ -65,7 +65,7 @@ private Time duracion_consulta;
         this.descripcion = descripcion;
     }
 
-    public void setCosto_consulta(double costo_consulta) {
+    public void setCosto_consulta(int costo_consulta) {
         this.costo_consulta = costo_consulta;
     }
 

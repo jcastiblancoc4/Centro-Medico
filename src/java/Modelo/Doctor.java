@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author jpcas
  */
-public class Doctor {
+public class Doctor{
     private int id;
     private String nombre;
     private String apellido;
@@ -23,10 +23,11 @@ public class Doctor {
     private String celular;
     private int idEspecialidad;
     private String tipoPersona;
-    private List<Cita> citas;
+    private List<Horario> citas;
     private String nombreEspecialidad;
+    private int cedula;
 
-    public Doctor(int id, String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona) {
+    public Doctor(int id, String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona, int cedula) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -36,10 +37,10 @@ public class Doctor {
         this.idEspecialidad = idEspecialidad;
         this.tipoPersona = tipoPersona;
         this.citas = citas;
-        
+        this.cedula = cedula;
     }
 
-    public Doctor(String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona) {
+    public Doctor(String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona, int cedula) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -47,6 +48,7 @@ public class Doctor {
         this.celular = celular;
         this.idEspecialidad = idEspecialidad;
         this.tipoPersona = tipoPersona;
+        this.cedula = cedula;
     }
 
     public Doctor() {
@@ -87,6 +89,15 @@ public class Doctor {
         return tipoPersona;
     }
 
+    public int getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(int cedula) {
+        this.cedula = cedula;
+    }
+
+    
     public String getNombreEspecialidad() {
         Especialidad especialidad = new Especialidad();
         especialidad = EspecialidadJDBC.instance().selectEspecialidad(idEspecialidad);
@@ -96,7 +107,7 @@ public class Doctor {
     
     
 
-    public List<Cita> getCitas() {
+    public List<Horario> getCitas() {
         return citas;
     }
 
@@ -132,7 +143,7 @@ public class Doctor {
         this.tipoPersona = tipoPersona;
     }
 
-    public void setCitas(List<Cita> citas) {
+    public void setCitas(List<Horario> citas) {
         this.citas = citas;
     }
     

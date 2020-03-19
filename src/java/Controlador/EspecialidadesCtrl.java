@@ -10,8 +10,6 @@ import ControlDAO.EspecialidadJDBC;
 
 import Modelo.Especialidad;
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -83,7 +81,7 @@ public class EspecialidadesCtrl extends HttpServlet {
     private void insertarEspecialidad(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String nombre=request.getParameter("nombre");
         String descripcion=request.getParameter("descripcion");
-        double costo_consulta=Integer.parseInt(request.getParameter("costo_consulta"));
+        int costo_consulta=Integer.parseInt(request.getParameter("costo_consulta"));
         String duracion_consulta = request.getParameter("duracion_consulta");
         Especialidad especialidad = new Especialidad(nombre, descripcion, costo_consulta, duracion_consulta);
         EspecialidadJDBC.instance().insert(especialidad);
@@ -105,7 +103,7 @@ public class EspecialidadesCtrl extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String nombre= request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");
-        double costo_consulta = Double.parseDouble(request.getParameter("costo_consulta"));
+        int costo_consulta = Integer.parseInt(request.getParameter("costo_consulta"));
         String duracion_consulta = request.getParameter("duracion_consulta");
         Especialidad especialidad=new Especialidad(id, nombre, descripcion, costo_consulta, duracion_consulta);
         String mensaje = EspecialidadJDBC.instance().update(especialidad);

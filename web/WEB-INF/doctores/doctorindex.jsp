@@ -59,6 +59,7 @@
                                     </div>
                                     
                                     <h4 class="card-title">${doctor.nombre} ${doctor.apellido}</h4>
+                                    <h5 class="card-text" style="">Cedula: ${doctor.cedula}</h5>
                                     <h5 class="card-text" style="">Direccion: ${doctor.direccion}</h5>
                                     <h5 class="card-text" style="">E-mail: ${doctor.correo}</h5>
                                     <h5 class="card-text" style="">Celular: ${doctor.celular}</h5>

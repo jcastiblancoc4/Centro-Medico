@@ -21,7 +21,7 @@ import servicios.Conexion;
  */
 public class DoctorJDBC {
     
-    private final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, direccion, correo, celular, idEspecialidad, tipoPersona) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    private final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, direccion, correo, celular, idEspecialidad, tipoPersona, cedula) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     
     public String insert(Doctor doctor){
         String mensaje ="";
@@ -39,6 +39,7 @@ public class DoctorJDBC {
             stmt.setString(index++, doctor.getCelular());
             stmt.setInt(index++, doctor.getIdEspecialidad());
             stmt.setString(index++, doctor.getTipoPersona());
+            stmt.setInt(index++, doctor.getCedula());
             row = stmt.executeUpdate();
         } catch (SQLException e) {
            System.out.println(mensaje = "Error: " + e.getMessage());
@@ -70,6 +71,7 @@ public class DoctorJDBC {
                 doctor.setCelular(rs.getString(6));
                 doctor.setIdEspecialidad(rs.getInt(7));
                 doctor.setTipoPersona(rs.getString(8));
+                doctor.setCedula(rs.getInt(10));
                 doctores.add(doctor);
                 
             }
@@ -84,7 +86,7 @@ public class DoctorJDBC {
         return doctores;
     }
     
-     private final String SQL_UPDATE = "UPDATE persona SET nombre=?, apellido=?, direccion=?, correo=?, celular=?, idespecialidad=?, tipopersona=? WHERE id=?;";
+     private final String SQL_UPDATE = "UPDATE persona SET nombre=?, apellido=?, direccion=?, correo=?, celular=?, idespecialidad=?, tipopersona=?, cedula=? WHERE id=?;";
     public String update(Doctor doctor) {
         String mensaje = "";
         Connection conn = null;
@@ -101,12 +103,12 @@ public class DoctorJDBC {
             stmt.setString(index++, doctor.getCelular());
             stmt.setInt(index++, doctor.getIdEspecialidad());
             stmt.setString(index++, doctor.getTipoPersona());
+            stmt.setInt(index++, doctor.getCedula());
             stmt.setInt(index++, doctor.getId());
             row = stmt.executeUpdate();
             mensaje = "Se actualizo" + row + "registro(s), satisfactoriamente";
         } catch (SQLException e) {
-            System.out.println("--------------------------------");
-           System.out.println(  mensaje = "Error: " + e.getMessage());
+            System.out.println(  mensaje = "Error: " + e.getMessage());
 
         } finally {
             Conexion.closed(stmt);
@@ -116,7 +118,7 @@ public class DoctorJDBC {
 
     }
     
-    private final String SQL_SELECT2 = "SELECT id, nombre, apellido, direccion, correo, celular, idespecialidad, tipopersona FROM persona WHERE id=?;";
+    private final String SQL_SELECT2 = "SELECT id, nombre, apellido, direccion, correo, celular, idespecialidad, tipopersona, cedula FROM persona WHERE id=?;";
      public Doctor selectDoctor(int id){
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -137,6 +139,7 @@ public class DoctorJDBC {
                 doctor.setCelular(rs.getString(6));
                 doctor.setIdEspecialidad(rs.getInt(7));
                 doctor.setTipoPersona(rs.getString(8));
+                doctor.setCedula(rs.getInt(10));
              }
          }catch(SQLException e){
              System.out.print(e.getMessage());

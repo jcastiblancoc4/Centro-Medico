@@ -93,7 +93,7 @@ public class EspecialidadJDBC {
                 especialidad.setId(rs.getInt(1));
                 especialidad.setNombre(rs.getString(2));
                 especialidad.setDescripcion(rs.getString(3));
-                especialidad.setCosto_consulta(rs.getDouble(4));
+                especialidad.setCosto_consulta(rs.getInt(4));
                 especialidad.setDuracion_consulta(rs.getString(5));
                 especialidades.add(especialidad);
             }
@@ -124,7 +124,7 @@ public class EspecialidadJDBC {
                 especialidad.setId(rs.getInt(1));
                 especialidad.setNombre(rs.getString(2));
                 especialidad.setDescripcion(rs.getString(3));
-                especialidad.setCosto_consulta(rs.getDouble(4));
+                especialidad.setCosto_consulta(rs.getInt(4));
                 especialidad.setDuracion_consulta(rs.getString(5));
              }
          }catch(SQLException e){

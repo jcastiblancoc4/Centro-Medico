@@ -13,7 +13,6 @@ import Modelo.Especialidad;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -89,7 +88,8 @@ public class DoctoresCtrl extends HttpServlet {
         String celular= request.getParameter("celular");
         int especialidad = Integer.parseInt(request.getParameter("idEspecialidad"));
         String tipoPersona = "doctor";
-        Doctor doctor = new Doctor(nombre, apellido, direccion, correo, celular, especialidad, tipoPersona);
+        int cedula = Integer.parseInt(request.getParameter("cedula"));
+        Doctor doctor = new Doctor(nombre, apellido, direccion, correo, celular, especialidad, tipoPersona, cedula);
         DoctorJDBC.instance().insert(doctor);
         response.sendRedirect("DoctoresCtrl");   
     }
@@ -114,7 +114,8 @@ public class DoctoresCtrl extends HttpServlet {
         String celular= request.getParameter("celular");
         int especialidad = Integer.parseInt(request.getParameter("idEspecialidad"));
         String tipoPersona = "doctor";
-        Doctor doctor = new Doctor(id,nombre, apellido, direccion, correo, celular, especialidad, tipoPersona);
+        int cedula = Integer.parseInt(request.getParameter("cedula"));
+        Doctor doctor = new Doctor(id,nombre, apellido, direccion, correo, celular, especialidad, tipoPersona, cedula);
         String mensaje = DoctorJDBC.instance().update(doctor);
         request.setAttribute("mensaje", mensaje);  
         response.sendRedirect("DoctoresCtrl");

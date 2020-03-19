@@ -4,12 +4,6 @@
  * and open the template in the editor.
  */
 package Modelo;
-
-import ControlDAO.EspecialidadJDBC;
-import java.util.List;
-
-
-
 /**
  *
  * @author jpcas
@@ -23,8 +17,9 @@ public class Paciente {
     private String celular;
     private String tipoPersona;
     private int numeroCitas;
+    private int cedula;
 
-    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, int numeroCitas) {
+    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, int numeroCitas, int cedula) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -33,28 +28,49 @@ public class Paciente {
         this.celular = celular;
         this.tipoPersona = tipoPersona;
         this.numeroCitas = numeroCitas;
+        this.cedula = cedula;
     }
 
-    public Paciente(String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.correo = correo;
-        this.celular = celular;
-        this.tipoPersona = tipoPersona;
-    }
-
-    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular) {
+    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, int cedula) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
         this.correo = correo;
         this.celular = celular;
+        this.tipoPersona = tipoPersona;
+        this.cedula = cedula;
+    }
+    
+    
+
+    public Paciente(String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, int cedula) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.correo = correo;
+        this.celular = celular;
+        this.tipoPersona = tipoPersona;
+        this.cedula = cedula;
     }
 
-   
-    
+    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, int cedula) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.correo = correo;
+        this.celular = celular;
+        this.cedula = cedula;
+    }
+
+    public int getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(int cedula) {
+        this.cedula = cedula;
+    }
 
     public int getNumeroCitas() {
         return numeroCitas;

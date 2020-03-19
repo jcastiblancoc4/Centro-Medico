@@ -12,14 +12,14 @@ import java.util.Date;
  *
  * @author jpcas
  */
-public class Cita {
+public class Horario {
     int id;
     boolean estado;
     Date fecha_hora;
     Time duracion;
     int id_doctor;    
 
-    public Cita(int id, boolean estado, Date fecha_hora, Time duracion, int id_doctor) {
+    public Horario(int id, boolean estado, Date fecha_hora, Time duracion, int id_doctor) {
         this.id = id;
         this.estado = estado;
         this.fecha_hora = fecha_hora;
@@ -27,7 +27,7 @@ public class Cita {
         this.id_doctor = id_doctor;
     }
 
-    public Cita() {
+    public Horario() {
     }
 
     public int getId() {

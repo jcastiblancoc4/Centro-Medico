@@ -36,11 +36,14 @@
             .crear{
                 margin: 10px auto auto 2%;
             }
+            .valor::before{
+                content: '$';
+            }
             label{
                 text-transform: uppercase;
                 font-weight: 600;
-                
             }
+            
             
            
         </style>
@@ -72,13 +75,15 @@
                     <div class="form-row item" >
                         <div class="col-sm-6">
                             <label>Costo Consulta</label>
-                            <input type="number" class="form-control" name="costo_consulta" value="${especialidad.costo_consulta}">
+                            <input type="number" class="form-control" name="costo_consulta" value="${especialidad.costo_consulta}" max="100000" min="30000" step="10000">
                         </div>
+                      
                         <div class="col-sm-6">
                             <label>Duracion Consulta</label>
-                            <input type="number" class="form-control" name="duracion_consulta" value="${especialidad.duracion_consulta}">
+                            <input type="time" class="form-control"name="duracion_consulta" value="${especialidad.duracion_consulta}" max="02:00:00" min="00:30:00" step="1">
                         </div>
                     </div>
+                        <div class="input-group mb-3">
                             <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
             </form>
             

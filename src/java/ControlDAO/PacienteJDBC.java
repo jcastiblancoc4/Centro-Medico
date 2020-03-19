@@ -22,7 +22,7 @@ import servicios.Conexion;
  */
 public class PacienteJDBC {
     
-    private final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, direccion, correo, celular, tipoPersona) VALUES (?, ?, ?, ?, ?, ?);";
+    private final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, direccion, correo, celular, tipoPersona, cedula) VALUES (?, ?, ?, ?, ?, ?, ?);";
     
     public String insert(Paciente paciente){
         String mensaje ="";
@@ -39,6 +39,7 @@ public class PacienteJDBC {
             stmt.setString(index++, paciente.getCorreo());
             stmt.setString(index++, paciente.getCelular());
             stmt.setString(index++, paciente.getTipoPersona());
+            stmt.setInt(index++, paciente.getCedula());
             row = stmt.executeUpdate();
         } catch (SQLException e) {
            System.out.println(mensaje = "Error: " + e.getMessage());
@@ -49,7 +50,7 @@ public class PacienteJDBC {
         return mensaje;
     }
     
-     private final String SQL_SELECT = "SELECT * FROM persona WHERE tipopersona='paciente' ";
+     private final String SQL_SELECT = "SELECT * FROM persona WHERE tipopersona='paciente'";
     public List<Paciente> select() throws IOException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -70,6 +71,7 @@ public class PacienteJDBC {
                 paciente.setCelular(rs.getString(6));
                 paciente.setTipoPersona(rs.getString(8));
                 paciente.setNumeroCitas(rs.getInt(9));
+                paciente.setCedula(rs.getInt(10));
                 pacientes.add(paciente);
             }
 
@@ -84,7 +86,7 @@ public class PacienteJDBC {
         return pacientes;
     }
     
-     private final String SQL_UPDATE = "UPDATE persona SET nombre=?, apellido=?, direccion=?, correo=?, celular=? WHERE id=?;";
+     private final String SQL_UPDATE = "UPDATE persona SET nombre=?, apellido=?, direccion=?, correo=?, celular=?, cedula=? WHERE id=?;";
     public String update(Paciente paciente) {
         String mensaje = "";
         Connection conn = null;
@@ -99,6 +101,7 @@ public class PacienteJDBC {
             stmt.setString(index++, paciente.getDireccion());
             stmt.setString(index++, paciente.getCorreo());
             stmt.setString(index++, paciente.getCelular());
+            stmt.setInt(index++, paciente.getCedula());
             stmt.setInt(index++, paciente.getId());
             row = stmt.executeUpdate();
             mensaje = "Se actualizo" + row + "registro(s), satisfactoriamente";
@@ -112,7 +115,7 @@ public class PacienteJDBC {
 
     }
     
-    private final String SQL_SELECT2 = "SELECT id, nombre, apellido, direccion, correo, celular FROM persona WHERE id=?;";
+    private final String SQL_SELECT2 = "SELECT id, nombre, apellido, direccion, correo, celular, cedula FROM persona WHERE id=?;";
      public Paciente selectPaciente(int id){
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -131,6 +134,7 @@ public class PacienteJDBC {
                 paciente.setDireccion(rs.getString(4));
                 paciente.setCorreo(rs.getString(5));
                 paciente.setCelular(rs.getString(6));
+                paciente.setCedula(rs.getInt(7));
              }
          }catch(SQLException e){
              System.out.print("-------------"+e.getMessage());

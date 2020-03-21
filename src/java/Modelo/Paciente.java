@@ -17,9 +17,9 @@ public class Paciente {
     private String celular;
     private String tipoPersona;
     private int numeroCitas;
-    private int cedula;
+    private String cedula;
 
-    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, int numeroCitas, int cedula) {
+    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, int numeroCitas, String cedula) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -31,7 +31,7 @@ public class Paciente {
         this.cedula = cedula;
     }
 
-    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, int cedula) {
+    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, String cedula) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -44,7 +44,7 @@ public class Paciente {
     
     
 
-    public Paciente(String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, int cedula) {
+    public Paciente(String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, String cedula) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -54,7 +54,7 @@ public class Paciente {
         this.cedula = cedula;
     }
 
-    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, int cedula) {
+    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String cedula) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -64,11 +64,11 @@ public class Paciente {
         this.cedula = cedula;
     }
 
-    public int getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 

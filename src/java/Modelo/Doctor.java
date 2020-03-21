@@ -8,12 +8,6 @@ package Modelo;
 import ControlDAO.EspecialidadJDBC;
 import java.util.List;
 
-
-
-/**
- *
- * @author jpcas
- */
 public class Doctor{
     private int id;
     private String nombre;
@@ -25,9 +19,11 @@ public class Doctor{
     private String tipoPersona;
     private List<Horario> citas;
     private String nombreEspecialidad;
-    private int cedula;
+    private String cedula;
+    private String rutaOrigen;
+    private String rutaFoto;
 
-    public Doctor(int id, String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona, int cedula) {
+    public Doctor(int id, String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona, String cedula, String rutaOrigen) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -36,11 +32,22 @@ public class Doctor{
         this.celular = celular;
         this.idEspecialidad = idEspecialidad;
         this.tipoPersona = tipoPersona;
-        this.citas = citas;
         this.cedula = cedula;
+        this.rutaOrigen = rutaOrigen;
     }
 
-    public Doctor(String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona, int cedula) {
+    public Doctor(String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, String cedula) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.correo = correo;
+        this.celular = celular;
+        this.tipoPersona = tipoPersona;
+        this.cedula = cedula;
+    }
+    
+    
+    public Doctor(String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona, String cedula, String rutaFoto, String rutaOrigen) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -49,10 +56,29 @@ public class Doctor{
         this.idEspecialidad = idEspecialidad;
         this.tipoPersona = tipoPersona;
         this.cedula = cedula;
+        this.rutaFoto = rutaFoto;
+        this.rutaOrigen = rutaOrigen;
+    }
+
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
+    }
+
+    public String getRutaFoto() {
+        
+        return rutaFoto;
     }
 
     public Doctor() {
      
+    }
+
+    public String getRutaOrigen() {
+        return rutaOrigen;
+    }
+
+    public void setRutaOrigen(String rutaOrigen) {
+        this.rutaOrigen = rutaOrigen;
     }
 
     
@@ -89,11 +115,11 @@ public class Doctor{
         return tipoPersona;
     }
 
-    public int getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 
@@ -147,7 +173,7 @@ public class Doctor{
         this.citas = citas;
     }
     
-    
+     
     
 
         
@@ -155,26 +181,4 @@ public class Doctor{
 
 
 
-//    public String copiarPegarArchivo(){
-//        InputStream inputStream = null;
-//        OutputStream outputStream = null;
-//        File archivoOriginal = null;
-//        File archivoCopia = null;
-//        try {
-//             archivoOriginal = new File(foto);
-//             archivoCopia = new File(ruta+archivoOriginal.getName());
-//            inputStream = new FileInputStream(archivoOriginal);
-//            outputStream = new FileOutputStream(archivoCopia);
-//            byte[] buffer = new byte[1024];
-//            int length;
-//            while ((length = inputStream.read(buffer)) > 0) {
-//                outputStream.write(buffer, 0, length);
-//            }
-//            inputStream.close();
-//            outputStream.close();
-//            System.out.println("Archivo copiado.");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return archivoCopia.getName();
-//}
+

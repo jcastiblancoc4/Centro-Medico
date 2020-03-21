@@ -12,11 +12,14 @@ import Modelo.Doctor;
 import Modelo.Especialidad;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import servicios.Foto;
 
 
 /**
@@ -54,8 +57,11 @@ public class DoctoresCtrl extends HttpServlet {
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
         if (accion.equals("crear")) {
-            
-            insertarDoctor(request, response);
+            try {
+                insertarDoctor(request, response);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(DoctoresCtrl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             if (accion.equals("actualizar")) {
                 modificarDoctor(request, response);
@@ -80,7 +86,7 @@ public class DoctoresCtrl extends HttpServlet {
     
     }
 
-    private void insertarDoctor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void insertarDoctor(HttpServletRequest request, HttpServletResponse response) throws IOException, InterruptedException {
         String nombre=request.getParameter("nombre");
         String apellido=request.getParameter("apellido");
         String direccion=request.getParameter("direccion");
@@ -88,15 +94,18 @@ public class DoctoresCtrl extends HttpServlet {
         String celular= request.getParameter("celular");
         int especialidad = Integer.parseInt(request.getParameter("idEspecialidad"));
         String tipoPersona = "doctor";
-        int cedula = Integer.parseInt(request.getParameter("cedula"));
-        Doctor doctor = new Doctor(nombre, apellido, direccion, correo, celular, especialidad, tipoPersona, cedula);
+        String cedula = request.getParameter("cedula");
+        String rutaFoto = Foto.instance().rutaDestionoFoto(request.getParameter("cedula"));
+        String rutaOrigen = request.getParameter("foto");
+        Doctor doctor = new Doctor(nombre, apellido, direccion, correo, celular, especialidad, tipoPersona, cedula, rutaFoto, rutaOrigen);
         DoctorJDBC.instance().insert(doctor);
-        response.sendRedirect("DoctoresCtrl");   
+        Thread.sleep(2000); 
+        response.sendRedirect("DoctoresCtrl");
+        
     }
 
     private void editarDoctor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.print(">>>>>>>> "+id);
         Doctor doctor = DoctorJDBC.instance().selectDoctor(id);
         request.setAttribute("doctor", doctor);
         request.setAttribute("tipoFormulario", "actualizar");
@@ -107,27 +116,33 @@ public class DoctoresCtrl extends HttpServlet {
 
     private void modificarDoctor(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-         String nombre=request.getParameter("nombre");
-        String apellido=request.getParameter("apellido");
-        String direccion=request.getParameter("direccion");
-        String correo=request.getParameter("correo");
-        String celular= request.getParameter("celular");
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String direccion = request.getParameter("direccion");
+        String correo = request.getParameter("correo");
+        String celular = request.getParameter("celular");
         int especialidad = Integer.parseInt(request.getParameter("idEspecialidad"));
         String tipoPersona = "doctor";
-        int cedula = Integer.parseInt(request.getParameter("cedula"));
-        Doctor doctor = new Doctor(id,nombre, apellido, direccion, correo, celular, especialidad, tipoPersona, cedula);
+        String cedula = request.getParameter("cedula");
+        String rutaOrigen = request.getParameter("foto");
+        Doctor doctor = new Doctor(id, nombre, apellido, direccion, correo, celular, especialidad, tipoPersona, cedula, rutaOrigen);
         String mensaje = DoctorJDBC.instance().update(doctor);
-        request.setAttribute("mensaje", mensaje);  
+        request.setAttribute("mensaje", mensaje);
         response.sendRedirect("DoctoresCtrl");
     }
 
     private void eliminarDoctor(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String mensaje = DoctorJDBC.instance().delete(id);
+        String rutaFoto = Foto.instance().rutaDestionoFoto(request.getParameter("cedula"));
+        String mensaje = DoctorJDBC.instance().delete(id, rutaFoto);
         request.setAttribute("mensaje", mensaje);
         response.sendRedirect("DoctoresCtrl");
     }
 
-
+      
+    
+      
+          
+      
 
 }

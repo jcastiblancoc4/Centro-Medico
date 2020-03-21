@@ -9,7 +9,7 @@
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <%--    <link rel="stylesheet" href="styles.css" type="text/css"> --%>
+        <link rel="stylesheet" type="text/css" href="styles/styles.css">
         <style>
             .titulo{
                 display:inline-block;
@@ -18,6 +18,9 @@
                 text-transform: uppercase;
                 font-weight: 600;
             }
+            
+            
+            
             .nuevo{                
                 display:inline-block;
                 margin-left: 40%;
@@ -55,24 +58,22 @@
                             <div class="card ">
                                 <div class="card-body">
                                     <div>
-                                    <img src="#" width="200" height="200" style="border: black solid ">
-                                    </div>
-                                    
+                                    <img src="${doctor.rutaFoto}" width="200" height="200" style="border: black solid ">
+                                    <div/>
                                     <h4 class="card-title">${doctor.nombre} ${doctor.apellido}</h4>
                                     <h5 class="card-text" style="">Cedula: ${doctor.cedula}</h5>
                                     <h5 class="card-text" style="">Direccion: ${doctor.direccion}</h5>
                                     <h5 class="card-text" style="">E-mail: ${doctor.correo}</h5>
                                     <h5 class="card-text" style="">Celular: ${doctor.celular}</h5>
                                     <h5 class="card-text" style="">Especialidad: ${doctor.nombreEspecialidad}</h5>
-                                    
-                                   
-                                    
                                     <form action="DoctoresCtrl" method="GET" style="display:inline-block">
                                         <input type="hidden" name="id" value="${doctor.id}">
+                                        <input type="hidden" name="cedula" value="${doctor.cedula}">
                                         <input type="submit" name="accion" value="editar" class="btn btn-warning btn-sm">       
                                     </form>
                                     <form  action="DoctoresCtrl" method="POST" style="display:inline-block">
                                         <input type="hidden" name="id" value="${doctor.id}">
+                                        <input type="hidden" name="cedula" value="${doctor.cedula}">
                                         <input type="submit" name="accion" value="eliminar" class="btn btn-danger btn-sm">
                                     </form>
                                 </div>           
@@ -80,8 +81,6 @@
                         </div>
                    </c:forEach>
                </div>
-          
-
         </div>
     </body>
 </html>

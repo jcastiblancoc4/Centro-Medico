@@ -39,7 +39,7 @@ public class PacienteJDBC {
             stmt.setString(index++, paciente.getCorreo());
             stmt.setString(index++, paciente.getCelular());
             stmt.setString(index++, paciente.getTipoPersona());
-            stmt.setInt(index++, paciente.getCedula());
+            stmt.setString(index++, paciente.getCedula());
             row = stmt.executeUpdate();
         } catch (SQLException e) {
            System.out.println(mensaje = "Error: " + e.getMessage());
@@ -71,7 +71,7 @@ public class PacienteJDBC {
                 paciente.setCelular(rs.getString(6));
                 paciente.setTipoPersona(rs.getString(8));
                 paciente.setNumeroCitas(rs.getInt(9));
-                paciente.setCedula(rs.getInt(10));
+                paciente.setCedula(rs.getString(10));
                 pacientes.add(paciente);
             }
 
@@ -101,7 +101,7 @@ public class PacienteJDBC {
             stmt.setString(index++, paciente.getDireccion());
             stmt.setString(index++, paciente.getCorreo());
             stmt.setString(index++, paciente.getCelular());
-            stmt.setInt(index++, paciente.getCedula());
+            stmt.setString(index++, paciente.getCedula());
             stmt.setInt(index++, paciente.getId());
             row = stmt.executeUpdate();
             mensaje = "Se actualizo" + row + "registro(s), satisfactoriamente";
@@ -134,7 +134,7 @@ public class PacienteJDBC {
                 paciente.setDireccion(rs.getString(4));
                 paciente.setCorreo(rs.getString(5));
                 paciente.setCelular(rs.getString(6));
-                paciente.setCedula(rs.getInt(7));
+                paciente.setCedula(rs.getString(7));
              }
          }catch(SQLException e){
              System.out.print("-------------"+e.getMessage());

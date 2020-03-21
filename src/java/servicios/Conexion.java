@@ -15,7 +15,7 @@ public class Conexion {
     private static String JDBC_URL = "jdbc:postgresql://localhost:5432/"+ DB; //"jdbc:derby://localhost:1527/" +DB ;//"jdbc:postgresql://localhost:5432/"+ DB;  //"jdbc:mysql://localhost:3306/+DB;
     private static String JDBC_USER = "postgres";  //"root";
     private static String JDBC_PASS = "Abc12345*"; 
-    private static int x=0;
+//    private static int x=0;
     private static Driver driver;
     
     //prueba
@@ -31,7 +31,7 @@ public class Conexion {
                 System.out.println("Fallo en cargar el Driver");
             }
         }
-        crearCarpeta();
+//        crearCarpeta();
         return DriverManager.getConnection(JDBC_URL,JDBC_USER, JDBC_PASS);
     }
     
@@ -62,20 +62,20 @@ public class Conexion {
         }
     }
     
-    public static void crearCarpeta(){
-        
-        if(x==0){
-        File directorio = new File("c:/fotos");
-        if (!directorio.exists()) {
-            if (directorio.mkdirs()) {
-                System.out.println("Directorio creado");
-            } else {
-                System.out.println("Error al crear directorio");
-            }
-    }
-    }
-        x++;
-    }
+//    public static void crearCarpeta(){
+//        
+//        if(x==0){
+//        File directorio = new File("c:/fotos");
+//        if (!directorio.exists()) {
+//            if (directorio.mkdirs()) {
+//                System.out.println("Directorio creado");
+//            } else {
+//                System.out.println("Error al crear directorio");
+//            }
+//    }
+//    }
+//        x++;
+//    }
 }
 
 

@@ -80,7 +80,7 @@
                       
                         <div class="col-sm-6">
                             <label>Duracion Consulta</label>
-                            <input type="time" class="form-control"name="duracion_consulta" value="${especialidad.duracion_consulta}" max="02:00:00" min="00:30:00" step="1">
+                            <input type="text" class="form-control"name="duracion_consulta" value="${especialidad.duracion_consulta}" max="02:00:00" min="00:30:00" step="1">
                         </div>
                     </div>
                         <div class="input-group mb-3">

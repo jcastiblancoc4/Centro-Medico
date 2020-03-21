@@ -83,6 +83,7 @@ public class EspecialidadesCtrl extends HttpServlet {
         String descripcion=request.getParameter("descripcion");
         int costo_consulta=Integer.parseInt(request.getParameter("costo_consulta"));
         String duracion_consulta = request.getParameter("duracion_consulta");
+        System.out.print("-----------" +duracion_consulta);
         Especialidad especialidad = new Especialidad(nombre, descripcion, costo_consulta, duracion_consulta);
         EspecialidadJDBC.instance().insert(especialidad);
         response.sendRedirect("EspecialidadesCtrl");    

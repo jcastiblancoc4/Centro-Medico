@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/X:/Proyecto_Primer_Corte/web/index.jsp</file>
-            <file>file:/X:/Proyecto_Primer_Corte/src/java/Controlador/EspecialidadesCtrl.java</file>
-            <file>file:/X:/Proyecto_Primer_Corte/src/java/Controlador/DoctoresCtrl.java</file>
-            <file>file:/X:/Proyecto_Primer_Corte/web/WEB-INF/includes/header.jsp</file>
+            <file>file:/X:/Proyecto_Primer_Corte/web/WEB-INF/doctores/doctorindex.jsp</file>
+            <file>file:/X:/Proyecto_Primer_Corte/web/WEB-INF/doctores/mostrar.jsp</file>
         </group>
     </open-files>
 </project-private>

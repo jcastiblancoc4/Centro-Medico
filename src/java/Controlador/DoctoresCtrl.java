@@ -64,7 +64,11 @@ public class DoctoresCtrl extends HttpServlet {
             }
         } else {
             if (accion.equals("actualizar")) {
-                modificarDoctor(request, response);
+                try {
+                    modificarDoctor(request, response);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(DoctoresCtrl.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 if (accion.equals("eliminar")) {
                     eliminarDoctor(request, response);
@@ -95,7 +99,7 @@ public class DoctoresCtrl extends HttpServlet {
         int especialidad = Integer.parseInt(request.getParameter("idEspecialidad"));
         String tipoPersona = "doctor";
         String cedula = request.getParameter("cedula");
-        String rutaFoto = Foto.instance().rutaDestionoFoto(request.getParameter("cedula"));
+        String rutaFoto = Foto.instance().rutaDestinoFoto(request.getParameter("cedula"),"/web/img/doctores/");
         String rutaOrigen = request.getParameter("foto");
         Doctor doctor = new Doctor(nombre, apellido, direccion, correo, celular, especialidad, tipoPersona, cedula, rutaFoto, rutaOrigen);
         DoctorJDBC.instance().insert(doctor);
@@ -114,26 +118,27 @@ public class DoctoresCtrl extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/doctores/mostrar.jsp").forward(request, response);
     }
 
-    private void modificarDoctor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void modificarDoctor(HttpServletRequest request, HttpServletResponse response) throws IOException, InterruptedException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String nombre = request.getParameter("nombre");
-        String apellido = request.getParameter("apellido");
-        String direccion = request.getParameter("direccion");
-        String correo = request.getParameter("correo");
-        String celular = request.getParameter("celular");
+        String nombre=request.getParameter("nombre");
+        String apellido=request.getParameter("apellido");
+        String direccion=request.getParameter("direccion");
+        String correo=request.getParameter("correo");
+        String celular= request.getParameter("celular");
         int especialidad = Integer.parseInt(request.getParameter("idEspecialidad"));
         String tipoPersona = "doctor";
         String cedula = request.getParameter("cedula");
+        String rutaFoto = Foto.instance().rutaDestinoFoto(request.getParameter("cedula"),"/web/img/doctores/");
         String rutaOrigen = request.getParameter("foto");
-        Doctor doctor = new Doctor(id, nombre, apellido, direccion, correo, celular, especialidad, tipoPersona, cedula, rutaOrigen);
-        String mensaje = DoctorJDBC.instance().update(doctor);
-        request.setAttribute("mensaje", mensaje);
+        Doctor doctor = new Doctor(id, nombre, apellido, direccion, correo, celular, especialidad, tipoPersona, cedula, rutaFoto, rutaOrigen);
+        DoctorJDBC.instance().update(doctor);
+        Thread.sleep(2000); 
         response.sendRedirect("DoctoresCtrl");
     }
 
     private void eliminarDoctor(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String rutaFoto = Foto.instance().rutaDestionoFoto(request.getParameter("cedula"));
+        String rutaFoto = Foto.instance().rutaDestinoFoto(request.getParameter("cedula"),"/web/img/doctores/");
         String mensaje = DoctorJDBC.instance().delete(id, rutaFoto);
         request.setAttribute("mensaje", mensaje);
         response.sendRedirect("DoctoresCtrl");

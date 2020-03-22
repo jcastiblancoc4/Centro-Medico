@@ -56,7 +56,7 @@
                             <div class="card ">
                                 <div class="card-body">
                                     <div>
-                                    <img src="#" width="200" height="200" style="border: black solid ">
+                                    <img src="${paciente.rutaFoto}" width="200" height="200" style="border: black solid ">
                                     </div>
                                     <h4 class="card-title">${paciente.nombre} ${paciente.apellido}</h4>
                                     <h5 class="card-text" style="">Cedula: ${paciente.cedula}</h5>

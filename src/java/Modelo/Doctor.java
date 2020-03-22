@@ -23,18 +23,7 @@ public class Doctor{
     private String rutaOrigen;
     private String rutaFoto;
 
-    public Doctor(int id, String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona, String cedula, String rutaOrigen) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.correo = correo;
-        this.celular = celular;
-        this.idEspecialidad = idEspecialidad;
-        this.tipoPersona = tipoPersona;
-        this.cedula = cedula;
-        this.rutaOrigen = rutaOrigen;
-    }
+
 
     public Doctor(String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, String cedula) {
         this.nombre = nombre;
@@ -48,6 +37,20 @@ public class Doctor{
     
     
     public Doctor(String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona, String cedula, String rutaFoto, String rutaOrigen) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.correo = correo;
+        this.celular = celular;
+        this.idEspecialidad = idEspecialidad;
+        this.tipoPersona = tipoPersona;
+        this.cedula = cedula;
+        this.rutaFoto = rutaFoto;
+        this.rutaOrigen = rutaOrigen;
+    }
+    
+    public Doctor(int id, String nombre, String apellido, String direccion, String correo, String celular, int idEspecialidad, String tipoPersona, String cedula, String rutaFoto, String rutaOrigen) {
+        this.id= id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;

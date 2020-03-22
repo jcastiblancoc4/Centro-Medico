@@ -126,6 +126,7 @@ public class DoctorJDBC {
         } finally {
             Conexion.closed(stmt);
             Conexion.closed(conn);
+            Foto.instance().copiarPegarArchivo(doctor.getRutaOrigen(), doctor.getRutaFoto());
         }
         return mensaje;
     }

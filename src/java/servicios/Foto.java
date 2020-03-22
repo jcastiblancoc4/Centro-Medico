@@ -19,10 +19,10 @@ import java.io.OutputStream;
 public class Foto {
     
     
-    public String rutaDestionoFoto(String nombre) {
+    public String rutaDestinoFoto(String nombre, String carpeta) {
         String rutaProyecto = this.getClass().getResource("").getPath();
         rutaProyecto = rutaProyecto.substring(0, rutaProyecto.length() - 37);
-        String rutaFoto = rutaProyecto + "/web/img/doctores/" + nombre + ".png";
+        String rutaFoto = rutaProyecto + carpeta + nombre + ".png";
         return rutaFoto;
     }
     

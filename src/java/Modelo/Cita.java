@@ -5,10 +5,17 @@
  */
 package Modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author jpcas
  */
 public class Cita {
+    private int id;
+    private int id_paciente;
+    private int id_especialidad;
+    private int id_doctor;
+    private Date fechaHora; 
     
 }

@@ -80,15 +80,11 @@
                         <label>Celular</label>
                         <input type="number" class="form-control" name="celular" value="${paciente.celular}">
                     </div>
-                    <div class="input-group mb-3 item">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroupFileAddon01">Upload Photo</span>
-                        </div>
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                        </div>
+                    
+                        <div class="ml-2 mt-2">
+			<input class="form-control-sm" type="file" name="foto" placeholder="Subir imagen" value=""/>
                     </div>
+                   
                     <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
             </form>
         </div>

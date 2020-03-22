@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 /**
  *
@@ -18,33 +13,13 @@ public class Paciente {
     private String tipoPersona;
     private int numeroCitas;
     private String cedula;
-
-    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, int numeroCitas, String cedula) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.correo = correo;
-        this.celular = celular;
-        this.tipoPersona = tipoPersona;
-        this.numeroCitas = numeroCitas;
-        this.cedula = cedula;
-    }
-
-    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, String cedula) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.correo = correo;
-        this.celular = celular;
-        this.tipoPersona = tipoPersona;
-        this.cedula = cedula;
-    }
+    private String rutaOrigen;
+    private String rutaFoto;
     
     
-
-    public Paciente(String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, String cedula) {
+    
+    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, String cedula, String rutaOrigen, String rutaFoto) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -52,33 +27,27 @@ public class Paciente {
         this.celular = celular;
         this.tipoPersona = tipoPersona;
         this.cedula = cedula;
+        this.rutaOrigen = rutaOrigen;
+        this.rutaFoto = rutaFoto;
     }
 
-    public Paciente(int id, String nombre, String apellido, String direccion, String correo, String celular, String cedula) {
-        this.id = id;
+    public Paciente(String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, String cedula, String rutaOrigen, String rutaFoto) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
         this.correo = correo;
         this.celular = celular;
+        this.tipoPersona = tipoPersona;
         this.cedula = cedula;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public int getNumeroCitas() {
-        return numeroCitas;
+        this.rutaOrigen = rutaOrigen;
+        this.rutaFoto = rutaFoto;
     }
 
     public Paciente() {
-     
+
     }
+
+    
 
     public int getId() {
         return id;
@@ -104,9 +73,24 @@ public class Paciente {
         return celular;
     }
 
-
     public String getTipoPersona() {
         return tipoPersona;
+    }
+
+    public int getNumeroCitas() {
+        return numeroCitas;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public String getRutaOrigen() {
+        return rutaOrigen;
+    }
+
+    public String getRutaFoto() {
+        return rutaFoto;
     }
 
     public void setId(int id) {
@@ -133,45 +117,24 @@ public class Paciente {
         this.celular = celular;
     }
 
-
-
     public void setTipoPersona(String tipoPersona) {
         this.tipoPersona = tipoPersona;
     }
-    
+
     public void setNumeroCitas(int numeroCitas) {
         this.numeroCitas = numeroCitas;
     }
-    
-    
-    
-    
 
-        
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public void setRutaOrigen(String rutaOrigen) {
+        this.rutaOrigen = rutaOrigen;
+    }
+
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
+    }
+    
 }
-
-
-
-//    public String copiarPegarArchivo(){
-//        InputStream inputStream = null;
-//        OutputStream outputStream = null;
-//        File archivoOriginal = null;
-//        File archivoCopia = null;
-//        try {
-//             archivoOriginal = new File(foto);
-//             archivoCopia = new File(ruta+archivoOriginal.getName());
-//            inputStream = new FileInputStream(archivoOriginal);
-//            outputStream = new FileOutputStream(archivoCopia);
-//            byte[] buffer = new byte[1024];
-//            int length;
-//            while ((length = inputStream.read(buffer)) > 0) {
-//                outputStream.write(buffer, 0, length);
-//            }
-//            inputStream.close();
-//            outputStream.close();
-//            System.out.println("Archivo copiado.");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return archivoCopia.getName();
-//}

@@ -75,7 +75,7 @@
                     <div class="form-row item" >
                         <div class="col-sm-6">
                             <label>Costo Consulta</label>
-                            <input type="number" class="form-control" name="costo_consulta" value="${especialidad.costo_consulta}" max="100000" min="30000" step="10000">
+                            <input type="text" class="form-control" name="costo_consulta" value="${especialidad.costo_consulta}" max="100000" min="30000" step="10000">
                         </div>
                       
                         <div class="col-sm-6">

@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import servicios.Conexion;
+import servicios.Foto;
 
 /**
  *
@@ -22,10 +23,11 @@ import servicios.Conexion;
  */
 public class PacienteJDBC {
     
-    private final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, direccion, correo, celular, tipoPersona, cedula) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    private final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, direccion, correo, celular, tipoPersona, cedula, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     
     public String insert(Paciente paciente){
         String mensaje ="";
+        String rutaFoto ="img/pacientes/";
         Connection conn = null;
         PreparedStatement stmt = null;
         int row = 0;
@@ -40,12 +42,14 @@ public class PacienteJDBC {
             stmt.setString(index++, paciente.getCelular());
             stmt.setString(index++, paciente.getTipoPersona());
             stmt.setString(index++, paciente.getCedula());
-            row = stmt.executeUpdate();
+            stmt.setString(index++, rutaFoto+paciente.getCedula()+".png");
+            row = stmt.executeUpdate();            
         } catch (SQLException e) {
            System.out.println(mensaje = "Error: " + e.getMessage());
         } finally {
             Conexion.closed(stmt);
             Conexion.closed(conn);
+            Foto.instance().copiarPegarArchivo(paciente.getRutaOrigen(), paciente.getRutaFoto());
         }
         return mensaje;
     }
@@ -72,6 +76,7 @@ public class PacienteJDBC {
                 paciente.setTipoPersona(rs.getString(8));
                 paciente.setNumeroCitas(rs.getInt(9));
                 paciente.setCedula(rs.getString(10));
+                paciente.setRutaFoto(rs.getString(11));
                 pacientes.add(paciente);
             }
 
@@ -86,9 +91,10 @@ public class PacienteJDBC {
         return pacientes;
     }
     
-     private final String SQL_UPDATE = "UPDATE persona SET nombre=?, apellido=?, direccion=?, correo=?, celular=?, cedula=? WHERE id=?;";
+     private final String SQL_UPDATE = "UPDATE persona SET nombre=?, apellido=?, direccion=?, correo=?, celular=?, cedula=?, foto=?, WHERE id=?;";
     public String update(Paciente paciente) {
         String mensaje = "";
+        String rutaFoto ="img/pacientes/";
         Connection conn = null;
         PreparedStatement stmt = null;
         int row = 0;
@@ -102,6 +108,7 @@ public class PacienteJDBC {
             stmt.setString(index++, paciente.getCorreo());
             stmt.setString(index++, paciente.getCelular());
             stmt.setString(index++, paciente.getCedula());
+            stmt.setString(index++, rutaFoto+paciente.getCedula()+".png");
             stmt.setInt(index++, paciente.getId());
             row = stmt.executeUpdate();
             mensaje = "Se actualizo" + row + "registro(s), satisfactoriamente";
@@ -110,6 +117,7 @@ public class PacienteJDBC {
         } finally {
             Conexion.closed(stmt);
             Conexion.closed(conn);
+            Foto.instance().copiarPegarArchivo(paciente.getRutaOrigen(), paciente.getRutaFoto());
         }
         return mensaje;
 
@@ -150,7 +158,7 @@ public class PacienteJDBC {
     
     
      private final String SQL_DELETE = "DELETE FROM persona WHERE id=?";
-    public String delete(int id){
+    public String delete(int id, String foto){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs= null;
@@ -168,6 +176,7 @@ public class PacienteJDBC {
             Conexion.closed(stmt);
             Conexion.closed(conn);
             Conexion.closed(rs);
+            Foto.instance().eliminarFoto(foto);
         }
       
         return mensaje;        

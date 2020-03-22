@@ -44,7 +44,8 @@ private Time duracion_consulta;
         return descripcion;
     }
 
-    public double getCosto_consulta() {
+    public int getCosto_consulta() {
+        System.out.println("-------------"+costo_consulta);
         return costo_consulta;
     }
 

@@ -33,7 +33,7 @@ public class EspecialidadJDBC {
             int index = 1;  //Contador de columnas en el SQL
             stmt.setString(index++, especialidad.getNombre());
             stmt.setString(index++, especialidad.getDescripcion());
-            stmt.setDouble(index++, especialidad.getCosto_consulta());
+            stmt.setInt(index++, especialidad.getCosto_consulta());
             stmt.setTime(index++, especialidad.getDuracion_consulta());
             row = stmt.executeUpdate();
             mensaje = "Se inserto " + row + " registro(s), satisfactoriamente";
@@ -59,7 +59,7 @@ public class EspecialidadJDBC {
             int index = 1; 
             stmt.setString(index++, especialidad.getNombre());
             stmt.setString(index++, especialidad.getDescripcion());
-            stmt.setDouble(index++, especialidad.getCosto_consulta());
+            stmt.setInt(index++, especialidad.getCosto_consulta());
             stmt.setTime(index++, especialidad.getDuracion_consulta());
             stmt.setInt(index++, especialidad.getId());
             row = stmt.executeUpdate();

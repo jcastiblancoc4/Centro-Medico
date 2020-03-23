@@ -9,7 +9,7 @@
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <%--    <link rel="stylesheet" href="styles.css" type="text/css"> --%>
+        <link rel="stylesheet" type="text/css" href="styles/styles.css">
         <style>
             .titulo{
                 display:inline-block;
@@ -28,8 +28,7 @@
                 margin-left: 2%;
                 margin-bottom: 30px;
                 padding: 10px;
-                
-            }
+             }
             h4{
                 text-transform: uppercase;
                 font-weight: 600;
@@ -37,41 +36,39 @@
             }
         </style>
         
-        
     </head>
     
-     
     <body>        
       <jsp:include page="../includes/header.jsp"></jsp:include>
        <div class="container theme-showcase" role="main" style=" margin-left: 10%; margin-right:10%" >
-            <form action="PacientesCtrl" method="GET">
+            <form action="CitasCtrl" method="GET">
                <div> 
-               <h3 class="titulo">Lista de Pacientes</h3>  
+               <h3 class="titulo">Lista de Citas</h3>  
                <input type="submit" name="accion" value="nuevo" class="btn btn-success nuevo">
                </div>
             </form>
-           <div class="row">
-                   <c:forEach items="${pacientes}" var="paciente">
+             <div class="row" >
+                   <c:forEach items="${citas}" var="cita">
                         <div class="col-sm-4 item">
                             <div class="card ">
                                 <div class="card-body">
-                                    <div>
-                                    <img src="${paciente.rutaFoto}" width="200" height="200" style="border: black solid ">
-                                    </div>
-                                    <h4 class="card-title">${paciente.nombre} ${paciente.apellido}</h4>
-                                    <h5 class="card-text" style="">Cedula: ${paciente.cedula}</h5>
-                                    <h5 class="card-text" style="">Direccion: ${paciente.direccion}</h5>
-                                    <h5 class="card-text" style=>Correo: ${paciente.correo}</h5>
-                                    <h5 class="card-text" style="">Celular: ${paciente.celular}</h5>
-                                    <h5 class="card-text" style="">Citas pendientes: ${paciente.numeroCitas}</h5>
-                                    <form action="PacientesCtrl" method="GET" style="display:inline-block">
-                                        <input type="hidden" name="id" value="${paciente.id}">
-                                        <input type="hidden" name="cedula" value="${paciente.cedula}">
+                                    <h4 class="card-title">id cita: ${cita.id}</h4>
+                                    <h5 class="card-text" style="">id Paciente: ${cita.idPaciente}</h5>
+                                    <h5 class="card-text" style="">id Especialidad: ${cita.idEspecialidad}</h5>
+                                    <h5 class="card-text" style="">id Doctor: ${cita.idDoctor}</h5>
+                                    <h5 class="card-text" style="">fecha: ${cita.fecha}</h5>
+                                    <h5 class="card-text" style="">hora: ${cita.hora}</h5>
+                                    <h5 class="card-text" style="">estado: ${cita.estado}</h5>
+                                    <h5 class="card-text" style="">asistio: ${cita.asistio}</h5>
+                                    
+                                    <form action="CitasCtrl" method="GET" style="display:inline-block">
+                                        <input type="hidden" name="id" value="${cita.id}">
+                                        
                                         <input type="submit" name="accion" value="editar" class="btn btn-warning btn-sm">       
                                     </form>
-                                    <form  action="PacientesCtrl" method="POST" style="display:inline-block">
-                                        <input type="hidden" name="id" value="${paciente.id}">
-                                         <input type="hidden" name="cedula" value="${paciente.cedula}">
+                                    <form  action="CitasCtrl" method="POST" style="display:inline-block">
+                                        <input type="hidden" name="id" value="${cita.id}">
+                                       
                                         <input type="submit" name="accion" value="eliminar" class="btn btn-danger btn-sm">
                                     </form>
                                 </div>           
@@ -79,8 +76,6 @@
                         </div>
                    </c:forEach>
                </div>
-          
-
         </div>
     </body>
 </html>

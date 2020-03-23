@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,7 +37,6 @@ public class EspecialidadesCtrl extends HttpServlet {
                     editarEspecialidad(request, response);
                 } 
             }
-
         } else {
             List<Especialidad> listaEspecialidades = EspecialidadJDBC.instance().select();
             request.setAttribute("especialidades", listaEspecialidades);
@@ -79,6 +79,7 @@ public class EspecialidadesCtrl extends HttpServlet {
          }
 
     private void insertarEspecialidad(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      //   JOptionPane.showMessageDialog(null, "----------------");
         String nombre=request.getParameter("nombre");
         String descripcion=request.getParameter("descripcion");
         int costo_consulta=Integer.parseInt(request.getParameter("costo_consulta"));
@@ -87,7 +88,6 @@ public class EspecialidadesCtrl extends HttpServlet {
         Especialidad especialidad = new Especialidad(nombre, descripcion, costo_consulta, duracion_consulta);
         EspecialidadJDBC.instance().insert(especialidad);
         response.sendRedirect("EspecialidadesCtrl");    
-    
     
     }
 

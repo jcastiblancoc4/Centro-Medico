@@ -23,6 +23,8 @@ public class Foto {
         String rutaProyecto = this.getClass().getResource("").getPath();
         rutaProyecto = rutaProyecto.substring(0, rutaProyecto.length() - 37);
         String rutaFoto = rutaProyecto + carpeta + nombre + ".png";
+        System.out.println(">>>>>>>>> nombre foto --  "+nombre);
+        System.out.println(">>>>>>>>> ruta foto --  "+rutaFoto);
         return rutaFoto;
     }
     
@@ -49,7 +51,7 @@ public class Foto {
     public void eliminarFoto(String ruta) {
         File imagen = new File(ruta);
         imagen.delete();
-        System.out.println("Aqui >>>>>>>>>>>>>>>>");
+        System.out.println("Aqui >>>>>>>>>>>>>>>>" + ruta);
     }
 
     private static Foto foto;

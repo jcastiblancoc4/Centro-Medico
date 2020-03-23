@@ -16,7 +16,7 @@
             <li><a href="PacientesCtrl">Pacientes</a>
             <li><a href="DoctoresCtrl">Doctores</a>
             <li><a href="EspecialidadesCtrl">Especialidades</a>
-            <li><a href="#">Historias</a>
+            <li><a href="CitasCtrl">Citas</a>
             <li><a href="#">Acerca de</a></li>
             <li><a href="#">Login</a></li> 
             

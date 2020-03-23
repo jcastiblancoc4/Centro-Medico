@@ -52,10 +52,22 @@
                         <div class="col-sm-4 item">
                             <div class="card ">
                                 <div class="card-body">
+                                    
                                     <h4 class="card-title">id cita: ${cita.id}</h4>
-                                    <h5 class="card-text" style="">id Paciente: ${cita.idPaciente}</h5>
-                                    <h5 class="card-text" style="">id Especialidad: ${cita.idEspecialidad}</h5>
-                                    <h5 class="card-text" style="">id Doctor: ${cita.idDoctor}</h5>
+                                    
+                                    <h5 class="card-text" style="">Nombre Paciente: ${cita.paciente}</h5>
+                                    <h5 class="card-text" style="">Cedula Paciente: ${cita.cedulaPaciente}</h5>
+                                    <h5 class="card-text" style="">Numero de Celular Paciente: ${cita.celularPaciente}</h5>
+                                    
+                                    
+                                    <h5 class="card-text" style="">Especialidad de Cita: ${cita.especialidad}</h5>
+                                    <h5 class="card-text" style="">Duracion de Cita: ${cita.duracionConsulta}</h5>
+                                    <h5 class="card-text" style="">Costo de Cita: $${cita.valorConsulta}</h5>
+                                    
+                                    <h5 class="card-text" style="">Doctor: ${cita.doctor}</h5>
+                                    <h5 class="card-text" style="">Cedula Doctor: ${cita.cedulaDoctor}</h5>
+                                    <h5 class="card-text" style="">Numero de Celular Doctor ${cita.celularDoctor}</h5>
+                                    
                                     <h5 class="card-text" style="">fecha: ${cita.fecha}</h5>
                                     <h5 class="card-text" style="">hora: ${cita.hora}</h5>
                                     <h5 class="card-text" style="">estado: ${cita.estado}</h5>

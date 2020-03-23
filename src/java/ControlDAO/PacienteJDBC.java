@@ -129,6 +129,7 @@ public class PacienteJDBC {
         PreparedStatement stmt = null;
         ResultSet rs= null;
         Paciente paciente = null;
+        
         try{
              conn= Conexion.getConnection();
              stmt = conn.prepareStatement(SQL_SELECT2);

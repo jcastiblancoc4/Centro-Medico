@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import ControlDAO.DoctorJDBC;
+import ControlDAO.EspecialidadJDBC;
 import ControlDAO.PacienteJDBC;
 import java.sql.Time;
 import java.util.Date;
@@ -23,10 +25,23 @@ public class Cita {
     private String estado;
     private Boolean asistio;
     
-    private String nombrePaciente;
-    private String apellidoPaciente;
-    private String cedulaPciente;
+    private Paciente paciente1;
+    private String paciente;
+    private String cedulaPaciente;
+    private String celularPaciente;
+    
+    
+    private Especialidad especialidad1;
+    private String especialidad;
+    private int valorConsulta;
+    private Time duracionConsulta;
 
+    private Doctor doctor1;
+    private String doctor;
+    private String cedulaDoctor;
+    private String celularDoctor;
+    
+    
     public Cita(int id, int id_paciente, int id_especialidad, int id_doctor, Date fecha, Time hora, String estado, Boolean asistio) {
         this.id = id;
         this.idPaciente = id_paciente;
@@ -116,19 +131,57 @@ public class Cita {
         this.asistio = asistio;
     }
 
-    public String getNombrePaciente() {
-        Paciente paciente = new Paciente();
-        paciente = PacienteJDBC.instance().selectPaciente(idPaciente);
-        nombrePaciente = paciente.getNombre();
-        return nombrePaciente;
+    public String getPaciente() {
+        paciente1 = new Paciente();
+        paciente1 = PacienteJDBC.instance().selectPaciente(idPaciente);
+        paciente = paciente1.getNombre()+" "+paciente1.getApellido();
+        return paciente;
     }
 
-    public String getApellidoPaciente() {
-        return apellidoPaciente;
+
+    public String getCedulaPaciente() {
+        cedulaPaciente = paciente1.getCedula();
+        return cedulaPaciente;
+    }
+    
+    public String getCelularPaciente() {
+        celularPaciente = paciente1.getCelular();
+        return celularPaciente;
     }
 
-    public String getCedulaPciente() {
-        return cedulaPciente;
+    public String getEspecialidad() {
+        especialidad1 = new Especialidad();
+        especialidad1 = EspecialidadJDBC.instance().selectEspecialidad(idEspecialidad);
+        especialidad = especialidad1.getNombre();
+        return especialidad;
+    }
+
+    public int getValorConsulta() {
+        valorConsulta = especialidad1.getCosto_consulta();
+        return valorConsulta;
+    }
+
+    public Time getDuracionConsulta() {
+        duracionConsulta = especialidad1.getDuracion_consulta();
+        return duracionConsulta;
+    }
+
+    public String getDoctor() {
+        doctor1 = new Doctor();
+        doctor1 = DoctorJDBC.instance().selectDoctor(idDoctor);
+        doctor = doctor1.getNombre()+" "+doctor1.getApellido();
+        return doctor;
+    }
+
+    public String getCedulaDoctor() {
+        cedulaDoctor = doctor1.getCedula();
+        return cedulaDoctor;
+    }
+    
+    public String getCelularDoctor() {
+        celularDoctor = doctor1.getCelular();
+        return celularDoctor;
+        
     }
     
     

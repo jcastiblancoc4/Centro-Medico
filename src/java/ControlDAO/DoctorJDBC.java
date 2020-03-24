@@ -59,7 +59,7 @@ public class DoctorJDBC {
         return mensaje;
     }
     
-     private final String SQL_SELECT = "SELECT * FROM persona WHERE tipoPersona='doctor'";
+    private final String SQL_SELECT = "SELECT * FROM persona WHERE tipoPersona='doctor'";
     public List<Doctor> select() throws IOException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -96,7 +96,43 @@ public class DoctorJDBC {
         return doctores;
     }
     
-     private final String SQL_UPDATE = "UPDATE persona SET nombre=?, apellido=?, direccion=?, correo=?, celular=?, idespecialidad=?, tipopersona=?, cedula=?, foto=? WHERE id=?;";
+    
+    private final String SQL_SELECT_E = "SELECT id, nombre, apellido, correo, celular, cedula, foto FROM persona where idespecialidad=?";
+    public List<Doctor> selectDoctoresE(int id) throws IOException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Doctor doctor = null;
+        List<Doctor> doctores = new ArrayList();
+            try {
+                conn = Conexion.getConnection();
+                stmt = conn.prepareStatement(SQL_SELECT_E);
+                stmt.setInt(1, id);
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                doctor = new Doctor();
+                doctor.setId(rs.getInt(1));
+                doctor.setNombre(rs.getString(2));
+                doctor.setApellido(rs.getString(3));
+                doctor.setCorreo(rs.getString(4));
+                doctor.setCelular(rs.getString(5));
+                doctor.setCedula(rs.getString(6));
+                doctor.setRutaFoto(rs.getString(7));
+                doctores.add(doctor);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            Conexion.closed(stmt);
+            Conexion.closed(conn);
+            Conexion.closed(rs);
+        }
+        return doctores;
+    }
+    
+    
+    private final String SQL_UPDATE = "UPDATE persona SET nombre=?, apellido=?, direccion=?, correo=?, celular=?, idespecialidad=?, tipopersona=?, cedula=?, foto=? WHERE id=?;";
     public String update(Doctor doctor) {
         String mensaje = "";
         String rutaFoto ="img/doctores/";

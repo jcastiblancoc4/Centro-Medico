@@ -1,8 +1,9 @@
-@import url('normalize.css');
 
 
-
-
-body{
-    background:  aqua;
-}
+            body{
+               background-image: url("../img/img/fondo.jpg") 
+            }
+            
+        
+            
+            

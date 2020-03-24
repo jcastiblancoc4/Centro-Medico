@@ -17,7 +17,7 @@ public class Doctor{
     private String celular;
     private int idEspecialidad;
     private String tipoPersona;
-    private List<Horario> citas;
+    private List<Agenda> citas;
     private String nombreEspecialidad;
     private String cedula;
     private String rutaOrigen;
@@ -136,7 +136,7 @@ public class Doctor{
     
     
 
-    public List<Horario> getCitas() {
+    public List<Agenda> getCitas() {
         return citas;
     }
 
@@ -172,7 +172,7 @@ public class Doctor{
         this.tipoPersona = tipoPersona;
     }
 
-    public void setCitas(List<Horario> citas) {
+    public void setCitas(List<Agenda> citas) {
         this.citas = citas;
     }
     

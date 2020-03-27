@@ -23,8 +23,6 @@ public class Foto {
         String rutaProyecto = this.getClass().getResource("").getPath();
         rutaProyecto = rutaProyecto.substring(0, rutaProyecto.length() - 37);
         String rutaFoto = rutaProyecto + carpeta + nombre + ".png";
-        System.out.println(">>>>>>>>> nombre foto --  "+nombre);
-        System.out.println(">>>>>>>>> ruta foto --  "+rutaFoto);
         return rutaFoto;
     }
     
@@ -32,6 +30,8 @@ public class Foto {
         String mensaje = "";
         File origen = new File(rutaOrigen);
         File destino = new File(rutaDestino);
+        System.out.print("origen >> "+rutaOrigen);
+        System.out.print("origen >> "+rutaDestino);
         try {
             InputStream in = new FileInputStream(origen);
             OutputStream out = new FileOutputStream(destino);

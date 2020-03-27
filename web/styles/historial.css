@@ -1,0 +1,19 @@
+body{
+    background-image: url("../img/img/fondo.jpg") 
+}
+
+.contenedor{
+    border: solid #ffffff;
+    margin: 20px 200px auto 200px;
+    background: #ffffff;
+    
+    
+}
+
+.contenedor .boton{
+    margin: 5px auto auto 40%;
+}
+            
+        
+            
+            

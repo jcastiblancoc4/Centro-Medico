@@ -1,3 +1,4 @@
+<%@page import="Modelo.Agenda"%>
 <%@page import="Modelo.Doctor"%>
 <%@page import="Modelo.Cita"%>
 <%@page import="java.util.List"%>
@@ -61,77 +62,132 @@
     <body>
         <jsp:include page="../includes/header.jsp"></jsp:include>
         <div class=" contenedor">
-            <% if(tipoForm.equals("doctor")){ %>
-            <h3 class="titulo">Creacion de Cita</h3>
-            <form action="CitasCtrl" method="POST">
+            <% if(tipoForm.equals("especialidad")){ %>
+                <h3 class="titulo">Creacion de Cita Paciente</h3>
+                <form action="CitasCtrl" method="POST">
                     <div class="form-group item">
-                        <h3>Selecciones Paciente</h3>
+                        <h4>Seleccione Paciente</h4>
                         <select class="custom-select" name="idPaciente" style="margin-left:20px; width: 100px ">
                             <option selected>Choose...</option>
-                             <% for (Paciente paciente : pacientes) {%>
+                            <% for (Paciente paciente : pacientes) {%>
                                 <option value="<%=paciente.getId()%>"><%=paciente.getNombre()%> <%=paciente.getApellido()%></option>
                             <%}%>
                         </select>
                     </div>
+                    <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
+                </form>
+            <%}
+            if(tipoForm.equals("doctor")){
+            String paciente1= (String) request.getAttribute("paciente");
+            String cedulaPaciente= (String) request.getAttribute("cedulaPaciente");
+            %>
+                <h3 class="titulo">Creacion de Cita Paciente <%=paciente1%></h3>
+                <form action="CitasCtrl" method="POST">
                     <div class="form-group item">
-                        <h3>Seleccione Especialidad</h3>
+                        <h5>Paciente: <%=paciente1%> </h5>
+                        <h5>Cedula Paciente: <%=cedulaPaciente%> </h5>
+                        <h4>Seleccione Especialidad</h4>
                         <select class="custom-select" name="idEspecialidad" style="margin-left:20px">
                             <option selected>Choose...</option>
-                             <% for (Especialidad especialidad : especialidades) {%>
+                            <% for (Especialidad especialidad : especialidades) {%>
                                 <option value="<%=especialidad.getId()%>"><%=especialidad.getNombre()%></option>
                             <%}%>
                         </select>
                     </div>
                     <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
-            </form>
-        <%}       
-        if(tipoForm.equals("agenda")){
-        String paciente1= (String) request.getAttribute("paciente");
-        String cedulaPaciente= (String) request.getAttribute("cedulaPaciente");
-        String especialidad= (String) request.getAttribute("especialidad");
-        int valor= (Integer) request.getAttribute("valor");
-        List<Doctor> doctores = (List<Doctor>) request.getAttribute("doctoresE");
-
-%>
-    <h3 class="titulo">Creacion de Cita ${especialidad}</h3>
-        <h5>Paciente: <%=paciente1%> </h5>
-        <h5>Cedula Paciente: <%=cedulaPaciente%> </h5>
-        <h5>Especialidad: <%=especialidad%> </h5>
-        <h5>Valor De La Consulta: $<%=valor%> </h5>
-         
-        <div style="margin: 20px ">
-            <h3>Seleccione Un Doctor</h3>
-            <c:forEach items="${doctoresE}" var="doctor">
-                <form action="CitasCtrl" method="GET">
-                    
-                    <img src="${doctor.rutaFoto}" width="100" height="100" >
-                    <h4>${doctor.nombre} ${doctor.apellido}</h4>
-                    <h4>Cedula: ${doctor.cedula}</h4>
-                    <input type="hidden" name="id" value="${doctor.id}">
-                    <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
-                    <span><%=tipoForm%></span>
+                </form>
+            <%}
+            if(tipoForm.equals("agenda")){
+            String paciente1= (String) request.getAttribute("paciente");
+            String cedulaPaciente= (String) request.getAttribute("cedulaPaciente");
+            String especialidad= (String) request.getAttribute("especialidad");
+            int valor= (Integer) request.getAttribute("valor");
+           
+            %>
+            <h3 class="titulo">Creacion de Cita Doctores de <%=especialidad%> </h3>
+                <h4>Paciente: <%=paciente1%> </h4>
+                <h4>Cedula Paciente: <%=cedulaPaciente%> </h4>
+                <h4>Especialidad: <%=especialidad%> </h4>
+                <h4>Valor De La Consulta: $<%=valor%> </h4>
+                    <div style="margin: 20px ">
+                        <h3>Seleccione Un Doctor</h3>
+                        <c:forEach items="${doctoresE}" var="doctor">
+                            <form action="CitasCtrl" method="POST">
+                                <img src="${doctor.rutaFoto}" width="100" height="100" >
+                                <h4>${doctor.nombre} ${doctor.apellido}</h4>
+                                <h4>Cedula: ${doctor.cedula}</h4>
+                                <input type="hidden" name="idDoctor" value="${doctor.id}">
+                                <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
+                            </form>
+                        </c:forEach>
+                    </div>
+            <%}if(tipoForm.equals("hora")){
+            String paciente1= (String) request.getAttribute("paciente");
+            String cedulaPaciente= (String) request.getAttribute("cedulaPaciente");
+            String especialidad= (String) request.getAttribute("especialidad");
+            int valor= (Integer) request.getAttribute("valor");
+            String doctor= (String) request.getAttribute("doctor");
+            String cedulaDoctor= (String) request.getAttribute("cedulaDoctor");
+            
+            %>
+            <h3 class="titulo">Agenda Doctor <%=doctor%> </h3>
+                <h4>Paciente: <%=paciente1%> </h4>
+                <h4>Cedula Paciente: <%=cedulaPaciente%> </h4>
+                <h4>Especialidad: <%=especialidad%> </h4>
+                <h4>Valor De La Consulta: $<%=valor%> </h4>
+                <h4>Doctor: <%=doctor%> </h4>
+                <h4>Cedula Doctor: $<%=cedulaDoctor%> </h4>
+                    <div style="margin: 20px ">
+                        <h3>Ingrese fecha </h3>
+                        <form action="CitasCtrl" method="POST">
+                            <div class="form-group">
+                                <label for="fecha">Fecha año-mes-dia</label> 
+                                <input type="date" class="form-control" name="fecha" id="fecha" required="required"/>
+                            </div>
+                            <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
+                        </form>
+                    </div>
+            <%}
+            if(tipoForm.equals("validar-crear")){
+            String paciente1= (String) request.getAttribute("paciente");
+            String cedulaPaciente= (String) request.getAttribute("cedulaPaciente");
+            String especialidad= (String) request.getAttribute("especialidad");
+            int valor= (Integer) request.getAttribute("valor");
+            String doctor= (String) request.getAttribute("doctor");
+            String cedulaDoctor= (String) request.getAttribute("cedulaDoctor");
+            String fecha = (String) request.getAttribute("fecha");
+             List<Agenda> horario = (List<Agenda>) request.getAttribute("horario");
+            %>
+            <h3 class="titulo">Horario Del Doctor <%=doctor%> </h3>
+                <h4>Paciente: <%=paciente1%> </h4>
+                <h4>Cedula Paciente: <%=cedulaPaciente%> </h4>
+                <h4>Especialidad: <%=especialidad%> </h4>
+                <h4>Valor De La Consulta: $<%=valor%> </h4>
+                <h4>Doctor: <%=doctor%> </h4>
+                <h4>Cedula Doctor: $<%=cedulaDoctor%> </h4>
+                <h4>Fecha Agendamiento: $<%=fecha%> </h4>
+                    <div style="margin: 20px ">
+                        <h3>Seleccione Una Franja</h3>
                         
-               </form>
-            </c:forEach>
-        </div>
-        <%}
-        if(tipoForm.equals("crear")){
-        %>
-        
-        
-         <h3>Agenda del doctor</h3>
-        
-        <%}%>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-              
+                            <%for(Agenda franja: horario){ %>
+                            <form action="CitasCtrl" method="POST" style="border:solid #1b6d85">
+                                <div>
+                                    <span>Hora de Inicio: <%=franja.getHoraInicio()%>   </span>
+                                    <span>Hora Fin: <%=franja.getHoraFin()%>   </span>
+                                    <span>Estado: <%=franja.getEstado()%></span>
+                                </div>
+                                <%if(franja.getEstado().equals("disponible")){%>   
+                                <input type="hidden" name="hora" value="<%=franja.getHoraInicio()%>">
+                                <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
+                                <%}%>
+                            </form>
+                                <%}%>       
+                       
+                    </div>
+            <%}%>
+            
+                        
+            
         </div>
     </body>
 </html>

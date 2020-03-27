@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="styles/styles.css">
@@ -40,7 +40,7 @@
     
     <body>        
       <jsp:include page="../includes/header.jsp"></jsp:include>
-       <div class="container theme-showcase" role="main" style=" margin-left: 10%; margin-right:10%" >
+      <div class="container theme-showcase" role="main" style=" margin-left: 10%; margin-right:10%; background: #ffffff " >
             <form action="CitasCtrl" method="GET">
                <div> 
                <h3 class="titulo">Lista de Citas</h3>  
@@ -80,7 +80,6 @@
                                     </form>
                                     <form  action="CitasCtrl" method="POST" style="display:inline-block">
                                         <input type="hidden" name="id" value="${cita.id}">
-                                       
                                         <input type="submit" name="accion" value="eliminar" class="btn btn-danger btn-sm">
                                     </form>
                                 </div>           

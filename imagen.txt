@@ -1,65 +1,32 @@
-public void listarImg(int id, HttpServletResponse response){
-//            String sql ="select foto from persona where id="+id;
-//            response.setContentType("image/png");
-//            Connection conn = null;
-//            PreparedStatement stmt = null;
-//            ResultSet rs = null;
-//            byte b[] = null;
-//            int c;
-//            InputStream in=null;
-//            ServletOutputStream sout = null;
-//            try{
-//                conn = Conexion.getConnection();
-//                stmt = conn.prepareStatement(sql);
-//                rs = stmt.executeQuery();
-//                
-//                if(rs.next()){
-//                b = rs.getBytes("foto");
-//                }
-//                in = new ByteArrayInputStream(b);
-//                sout = response.getOutputStream();
-//                c = 0;
-//               System.out.println("--------------------");
-//                while ((c = in.read()) != -1) {
-//                    sout.write(c);
-//                     System.out.println("<<<<<<<<<< AQUI ");
-//                }
-//                in.close();
-//            sout.close();
-//            }catch(Exception e){
-//               System.out.println(" SQL >>>> "+e.getMessage());
-//            }
-//          }
-// 
-    public void listarImgb(int id, HttpServletResponse response){
-            String sql ="select foto from persona where id="+id;
-            response.setContentType("image/png");
-            Connection conn = null;
-            PreparedStatement stmt = null;
-            ResultSet rs = null;
-            
-            InputStream inputStream = null;
-            OutputStream outputStream = null;
-            BufferedInputStream bufferedInputStream = null;
-            BufferedOutputStream buffereOutputStream = null;
-            response.setContentType("img/png");
-            try{
-                outputStream=response.getOutputStream();
-                conn = Conexion.getConnection();
-                stmt = conn.prepareStatement(sql);
-                rs = stmt.executeQuery();
-                if(rs.next()){
-                    inputStream = rs.getBinaryStream("foto");
-                }
-                bufferedInputStream=new BufferedInputStream(inputStream);
-                buffereOutputStream=new BufferedOutputStream(outputStream);
-                int i=0;
-                while((i=bufferedInputStream.read())!=-1){
-                    buffereOutputStream.write(i);  
-                System.out.println("-------siiiiii");
-            }
-            }catch(Exception e){
-               System.out.println(" SQL >>>> "+e.getMessage());
-            }
-          }
- 
+
+CREATE TABLE public.persona
+(
+    id integer NOT NULL prymary key,
+    nombre character varying(50) ,
+    apellido character varying(50) ,
+    direccion character varying(50) ,
+    correo character varying(50),
+    celular character varying(12) ,
+    idespecialidad integer,
+    tipopersona character varying(15) ,
+    numerocitas integer,
+    cedula character varying(10) ,
+    foto character varying(100) 
+)
+
+alter table persona
+add constraint fkd
+foreign key(idespecialidad)
+references especialidad(id)
+
+create table cita(
+id serial primary key not null,
+id_paciente int,
+id_especialidad int,
+id_doctor int,
+fecha date,
+estado varchar(10),
+asisitio boolean,
+hora time
+)
+

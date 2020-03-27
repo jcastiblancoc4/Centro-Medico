@@ -5,7 +5,7 @@
  */
 package ControlDAO;
 
-import Modelo.Doctor;
+
 import Modelo.Paciente;
 import java.io.IOException;
 import java.sql.Connection;
@@ -23,7 +23,7 @@ import servicios.Foto;
  */
 public class PacienteJDBC {
     
-    private final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, direccion, correo, celular, tipoPersona, cedula, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    private final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, direccion, correo, celular, tipoPersona, numerocitas, cedula, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
     
     public String insert(Paciente paciente){
         String mensaje ="";
@@ -41,6 +41,7 @@ public class PacienteJDBC {
             stmt.setString(index++, paciente.getCorreo());
             stmt.setString(index++, paciente.getCelular());
             stmt.setString(index++, paciente.getTipoPersona());
+            stmt.setInt(index++, 0);
             stmt.setString(index++, paciente.getCedula());
             stmt.setString(index++, rutaFoto+paciente.getCedula()+".png");
             row = stmt.executeUpdate();            
@@ -90,6 +91,46 @@ public class PacienteJDBC {
             System.out.print(rs);
         return pacientes;
     }
+    
+    
+     private final String SQL_SELECT_P = "select* from persona where tipopersona='paciente' and numerocitas<=2";
+    public List<Paciente> selectPacientes() throws IOException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Paciente paciente = null;
+        List<Paciente> pacientes = new ArrayList();
+            try {
+                conn = Conexion.getConnection();
+                stmt = conn.prepareStatement(SQL_SELECT_P);
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                paciente = new Paciente();
+                paciente.setId(rs.getInt(1));
+                paciente.setNombre(rs.getString(2));
+                paciente.setApellido(rs.getString(3));
+                paciente.setDireccion(rs.getString(4));
+                paciente.setCorreo(rs.getString(5));
+                paciente.setCelular(rs.getString(6));
+                paciente.setTipoPersona(rs.getString(8));
+                paciente.setNumeroCitas(rs.getInt(9));
+                paciente.setCedula(rs.getString(10));
+                paciente.setRutaFoto(rs.getString(11));
+                pacientes.add(paciente);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error: >> " + e.getMessage());
+        } finally {
+            Conexion.closed(stmt);
+            Conexion.closed(conn);
+            Conexion.closed(rs);
+        }
+            System.out.print(rs);
+        return pacientes;
+    }
+    
+    
     
      private final String SQL_UPDATE = "UPDATE persona SET nombre=?, apellido=?, direccion=?, correo=?, celular=?, cedula=?, foto=?, WHERE id=?;";
     public String update(Paciente paciente) {
@@ -158,7 +199,7 @@ public class PacienteJDBC {
     }
     
     
-     private final String SQL_DELETE = "DELETE FROM persona WHERE id=?";
+    private final String SQL_DELETE = "DELETE FROM persona WHERE id=?";
     public String delete(int id, String foto){
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -183,6 +224,27 @@ public class PacienteJDBC {
         return mensaje;        
     }
     
+    private final String SQL_AUMENTAR_C = "UPDATE persona SET numerocitas= numerocitas +1 where id=?";
+    public void aumentarContador(int idPaciente) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs= null;
+        String mensaje="";
+                
+           try{
+             conn= Conexion.getConnection();
+             stmt = conn.prepareStatement(SQL_AUMENTAR_C);
+             stmt.setInt(1, idPaciente);
+             rs = stmt.executeQuery();
+             
+         }catch(SQLException e){
+              mensaje = "Error : " + e.getMessage();
+         }finally {
+            Conexion.closed(stmt);
+            Conexion.closed(conn);
+            Conexion.closed(rs);
+        }
+    }
     
     private static PacienteJDBC pacienteJDBC;
     
@@ -192,6 +254,8 @@ public class PacienteJDBC {
         }
         return pacienteJDBC;
     }
+
+    
 
     
 }

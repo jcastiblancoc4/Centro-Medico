@@ -88,7 +88,6 @@ public class EspecialidadJDBC {
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-
                 especialidad = new Especialidad();
                 especialidad.setId(rs.getInt(1));
                 especialidad.setNombre(rs.getString(2));
@@ -97,7 +96,6 @@ public class EspecialidadJDBC {
                 especialidad.setDuracion_consulta(rs.getString(5));
                 especialidades.add(especialidad);
             }
-
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
@@ -138,6 +136,7 @@ public class EspecialidadJDBC {
        
          return especialidad;
     }
+     
        
     private final String SQL_DELETE = "DELETE FROM Especialidad WHERE id=?";
     public String delete(int id){

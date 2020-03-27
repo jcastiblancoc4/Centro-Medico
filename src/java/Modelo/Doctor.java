@@ -17,12 +17,12 @@ public class Doctor{
     private String celular;
     private int idEspecialidad;
     private String tipoPersona;
-    private List<Agenda> citas;
     private String nombreEspecialidad;
     private String cedula;
     private String rutaOrigen;
     private String rutaFoto;
-
+    
+    private List<Agenda> citas;
 
 
     public Doctor(String nombre, String apellido, String direccion, String correo, String celular, String tipoPersona, String cedula) {

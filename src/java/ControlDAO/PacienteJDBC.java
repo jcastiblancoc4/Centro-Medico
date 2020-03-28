@@ -246,6 +246,30 @@ public class PacienteJDBC {
         }
     }
     
+     private final String SQL_DISMINUIR_C = "UPDATE persona SET numerocitas= numerocitas -1 where id=?";
+    public void disminuirContador(int idPaciente) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs= null;
+        String mensaje="";
+                
+           try{
+             conn= Conexion.getConnection();
+             stmt = conn.prepareStatement(SQL_DISMINUIR_C);
+             stmt.setInt(1, idPaciente);
+             rs = stmt.executeQuery();
+             
+         }catch(SQLException e){
+              System.out.println(">>>>>> "+e.getMessage());
+         }finally {
+            Conexion.closed(stmt);
+            Conexion.closed(conn);
+            Conexion.closed(rs);
+        }
+    }
+    
+    
+    
     private static PacienteJDBC pacienteJDBC;
     
     public static PacienteJDBC instance() {

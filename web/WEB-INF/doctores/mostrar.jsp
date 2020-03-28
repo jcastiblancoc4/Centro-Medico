@@ -12,11 +12,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+         <link rel="stylesheet" type="text/css" href="styles/doctor.css">
         <style>
             .contenedor{
-                border: solid black;
+                background-image: url("img/img/fondo.jpg");
                 width: 60%;
-                
                 margin: 0 auto;
                 margin-top: 2%;
                 margin-bottom: 30px;
@@ -45,15 +45,11 @@
         </style>
           <%
         String tipoForm= (String) request.getAttribute("tipoFormulario");
-        
-            List<Especialidad> especialidades = (List<Especialidad>) request.getAttribute("especialidades");
-        
+        List<Especialidad> especialidades = (List<Especialidad>) request.getAttribute("especialidades");
         Doctor doctor=null;
         if(tipoForm.equals("actualizar")){
         doctor = (Doctor) request.getAttribute("doctor");
         }
-        
-        
     %>  
     </head>
     <body>
@@ -83,24 +79,24 @@
                         <input type="email" class="form-control" name="correo" value="${doctor.correo}">
                     </div>
                     <div class="form-group item">
-                        <label>Celular</label>
+                        <label>Celular:</label>
                         <input type="number" class="form-control" name="celular" value="${doctor.celular}">
                     </div>
                     
                     <div class="form-group item">
-                        <label>Especialidad</label>
-                        <select class="custom-select" name="idEspecialidad" style="margin-left:20px">
+                        <label>Especialidad:</label>
+                        <select class="custom-select" name="idEspecialidad" style="margin-left:20px; color: #000 ">
                             <option selected>Choose...${doctor.nombreEspecialidad}</option>
                              <% for (Especialidad especialidad : especialidades) {%>
                                 <option value="<%=especialidad.getId()%>"><%=especialidad.getNombre()%></option>
                             <%}%>
                         </select>
                     </div>
-                        <div class="ml-2 mt-2">
+                        <div class="item">
 			<input class="form-control-sm" type="file" name="foto" placeholder="Subir imagen" value=""/>
                     </div>
                    
-                    <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
+                    <input type="submit" class="btn btn-success  item" value="<%=tipoForm%>" name="accion" >
             </form>
         </div>
     </body>

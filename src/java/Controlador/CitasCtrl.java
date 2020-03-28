@@ -182,10 +182,11 @@ public class CitasCtrl extends HttpServlet {
                                     response.sendRedirect("CitasCtrl");
                                 }else{
                                     System.out.println("Fecha no valida, la fecha no puede ser igual o menor a la actual");
-                                    
+                                     response.sendRedirect("CitasCtrl");
                                 }
                             }else{
                                 System.out.println("el paciente ya tiene una cita pendiente de la misma especialidad");
+                                 response.sendRedirect("CitasCtrl");
                             }
                         }
                     }
@@ -245,6 +246,7 @@ public class CitasCtrl extends HttpServlet {
         }else{
             if(accion.equals("cancelar")){
             CitaJDBC.instance().cancelarCita(idCita);
+            PacienteJDBC.instance().disminuirContador(cita.getIdPaciente());
             request.setAttribute("cita", cita);
             request.setAttribute("tipoFormulario", "cancelar");
             request.getRequestDispatcher("WEB-INF/citas/gestion.jsp").forward(request, response);
@@ -266,8 +268,8 @@ public class CitasCtrl extends HttpServlet {
                                 
                                 String asistio = request.getParameter("asistio");
                                 String observacion = request.getParameter("observacion");
-                                System.out.println(  ">>>>>>>>>>>>>>>>>> " + asistio + " "+ observacion);
                                 CitaJDBC.instance().finalizarCita(idCita, asistio,observacion);
+                                PacienteJDBC.instance().disminuirContador(cita.getIdPaciente());
                                 response.sendRedirect("CitasCtrl");
                              }
                          }

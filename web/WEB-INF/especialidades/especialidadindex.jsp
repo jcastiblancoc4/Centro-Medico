@@ -9,37 +9,16 @@
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <%--    <link rel="stylesheet" href="styles.css" type="text/css"> --%>
-        <style>
-         
-            .titulo{
-                display:inline-block;
-                margin: 3% auto 20px 2%;
-                padding: 0;
-                text-transform: uppercase;
-                font-weight: 600;
-            }
-            .nuevo{                
-                display:inline-block;
-                margin-left: 40%;
-            }
-            .item{
-                margin-left: 2%;
-                margin-bottom: 30px;
-            }
-            h4{
-                text-transform: uppercase;
-                font-weight: 600;
-                
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="styles/especialidad.css">
         
     </head>
     
      
     <body>        
-      <jsp:include page="../includes/header.jsp"></jsp:include>
-      <div class="container theme-showcase" role="main" style=" margin-left: 10%; margin-right:10%" >
+        <div class="container" style="margin-top: 5px; ">  
+        <jsp:include page="../includes/header.jsp"></jsp:include>
+        </div>
+        <div class="cuerpo">
            <form action="EspecialidadesCtrl" method="GET">
                <div> 
                <h3 class="titulo">Lista de Especialidades</h3>  

@@ -1,3 +1,16 @@
 body{
     background-image: url("../img/img/fondo.jpg") 
 }
+
+.cuerpo{
+        background-image: url("../img/img/fondo.jpg");
+	box-sizing: border-box;
+	color: white;
+	margin: 0 10% auto 10%;
+	display: inline-block;
+	width: 80%;
+	position: relative;
+	top: 40px;
+	padding: 10px;
+	padding-left: 10px;
+}

@@ -9,11 +9,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles/paciente.css">
         <style>
             .contenedor{
-                border: solid black;
+                background-image: url("img/img/fondo.jpg");
                 width: 60%;
-                
                 margin: 0 auto;
                 margin-top: 2%;
                 margin-bottom: 30px;
@@ -35,7 +35,6 @@
             label{
                 text-transform: uppercase;
                 font-weight: 600;
-                
             }
             
            
@@ -81,11 +80,11 @@
                         <input type="number" class="form-control" name="celular" value="${paciente.celular}">
                     </div>
                     
-                        <div class="ml-2 mt-2">
+                    <div class="item">
 			<input class="form-control-sm" type="file" name="foto" placeholder="Subir imagen" value=""/>
                     </div>
                    
-                    <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
+                    <input type="submit" class="btn btn-success crear item" value="<%=tipoForm%>" name="accion" >
             </form>
         </div>
     </body>

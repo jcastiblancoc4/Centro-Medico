@@ -15,59 +15,28 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <style>
-            .contenedor{
-                border: solid black;
-                width: 60%;
-                
-                margin: 0 auto;
-                margin-top: 2%;
-                margin-bottom: 30px;
-                padding: 2%;
-            }
-            .titulo{
-                display:inline-block;
-                margin: 15px auto 20px 2%;
-                padding: 0;
-                text-transform: uppercase;
-                font-weight: 600;
-            }
-            .item{
-                margin-left: 2%;
-            }
-            .crear{
-                margin: 10px auto auto 2%;
-            }
-            label{
-                text-transform: uppercase;
-                font-weight: 600;
-                
-            }
-            
-           
-        </style>
-          <%
+        <link rel="stylesheet" type="text/css" href="styles/cita.css">
+    <%
         String tipoForm= (String) request.getAttribute("tipoFormulario");
-            List<Paciente> pacientes = (List<Paciente>) request.getAttribute("pacientes");
-            List<Especialidad> especialidades = (List<Especialidad>) request.getAttribute("especialidades");
-        
+        List<Paciente> pacientes = (List<Paciente>) request.getAttribute("pacientes");
+        List<Especialidad> especialidades = (List<Especialidad>) request.getAttribute("especialidades");
         Cita cita=null;
         if(tipoForm.equals("actualizar")){
         cita = (Cita) request.getAttribute("cita");
         }
-        
-        
     %>  
     </head>
     <body>
+        <div class="container" style="margin-top: 5px; ">  
         <jsp:include page="../includes/header.jsp"></jsp:include>
-        <div class=" contenedor">
+        </div>
+        <div class="cuerpo">
             <% if(tipoForm.equals("especialidad")){ %>
                 <h3 class="titulo">Creacion de Cita Paciente</h3>
                 <form action="CitasCtrl" method="POST">
                     <div class="form-group item">
                         <h4>Seleccione Paciente</h4>
-                        <select class="custom-select" name="idPaciente" style="margin-left:20px; width: 100px ">
+                        <select class="custom-select" name="idPaciente" style="color: #000">
                             <option selected>Choose...</option>
                             <% for (Paciente paciente : pacientes) {%>
                                 <option value="<%=paciente.getId()%>"><%=paciente.getNombre()%> <%=paciente.getApellido()%></option>
@@ -84,10 +53,10 @@
                 <h3 class="titulo">Creacion de Cita Paciente <%=paciente1%></h3>
                 <form action="CitasCtrl" method="POST">
                     <div class="form-group item">
-                        <h5>Paciente: <%=paciente1%> </h5>
-                        <h5>Cedula Paciente: <%=cedulaPaciente%> </h5>
-                        <h4>Seleccione Especialidad</h4>
-                        <select class="custom-select" name="idEspecialidad" style="margin-left:20px">
+                        <h4>Paciente: <%=paciente1%> </h4>
+                        <h4>Cedula Paciente: <%=cedulaPaciente%> </h4>
+                        <h3>Seleccione Especialidad</h3>
+                        <select class="custom-select" name="idEspecialidad" style="color: #000">
                             <option selected>Choose...</option>
                             <% for (Especialidad especialidad : especialidades) {%>
                                 <option value="<%=especialidad.getId()%>"><%=especialidad.getNombre()%></option>
@@ -108,10 +77,11 @@
                 <h4>Paciente: <%=paciente1%> </h4>
                 <h4>Cedula Paciente: <%=cedulaPaciente%> </h4>
                 <h4>Especialidad: <%=especialidad%> </h4>
-                <h4>Valor De La Consulta: $<%=valor%> </h4>
-                    <div style="margin: 20px ">
+                <h4 style="color: red">Valor De La Consulta: $<%=valor%> </h4>
+                    <div style="margin: 0 auto 10px; display: inline-block; text-align:center ">
                         <h3>Seleccione Un Doctor</h3>
                         <c:forEach items="${doctoresE}" var="doctor">
+                            <div class="doc col-sm-5">
                             <form action="CitasCtrl" method="POST">
                                 <img src="${doctor.rutaFoto}" width="100" height="100" >
                                 <h4>${doctor.nombre} ${doctor.apellido}</h4>
@@ -119,6 +89,7 @@
                                 <input type="hidden" name="idDoctor" value="${doctor.id}">
                                 <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
                             </form>
+                            </div>
                         </c:forEach>
                     </div>
             <%}if(tipoForm.equals("hora")){
@@ -134,17 +105,16 @@
                 <h4>Paciente: <%=paciente1%> </h4>
                 <h4>Cedula Paciente: <%=cedulaPaciente%> </h4>
                 <h4>Especialidad: <%=especialidad%> </h4>
-                <h4>Valor De La Consulta: $<%=valor%> </h4>
+                <h4 style="color: red">Valor De La Consulta: $<%=valor%> </h4>
                 <h4>Doctor: <%=doctor%> </h4>
                 <h4>Cedula Doctor: $<%=cedulaDoctor%> </h4>
                     <div style="margin: 20px ">
                         <h3>Ingrese fecha </h3>
                         <form action="CitasCtrl" method="POST">
-                            <div class="form-group">
-                                <label for="fecha">Fecha año-mes-dia</label> 
-                                <input type="date" class="form-control" name="fecha" id="fecha" required="required"/>
+                            <div class="">
+                                <input type="date" style="color: #000" name="fecha" id="fecha" required="required"/>
                             </div>
-                            <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
+                            <input type="submit" class="btn btn-success crear"  style="margin-top:10px" value="<%=tipoForm%>" name="accion" >
                         </form>
                     </div>
             <%}
@@ -162,25 +132,27 @@
                 <h4>Paciente: <%=paciente1%> </h4>
                 <h4>Cedula Paciente: <%=cedulaPaciente%> </h4>
                 <h4>Especialidad: <%=especialidad%> </h4>
-                <h4>Valor De La Consulta: $<%=valor%> </h4>
+                <h4 style="color: red">Valor De La Consulta: $<%=valor%> </h4>
                 <h4>Doctor: <%=doctor%> </h4>
                 <h4>Cedula Doctor: $<%=cedulaDoctor%> </h4>
                 <h4>Fecha Agendamiento: $<%=fecha%> </h4>
-                    <div style="margin: 20px ">
+                    <div style="margin: 20px; display: inline-block; text-align:center  ">
                         <h3>Seleccione Una Franja</h3>
                         
                             <%for(Agenda franja: horario){ %>
-                            <form action="CitasCtrl" method="POST" style="border:solid #1b6d85">
-                                <div>
+                            <div class="franja" <%if(franja.getEstado().equals("asignada")){%> style="background-image: url('img/img/fondo.jpg')" <%}%>>
+                            <form action="CitasCtrl" method="POST" >
+                                
                                     <span>Hora de Inicio: <%=franja.getHoraInicio()%>   </span>
                                     <span>Hora Fin: <%=franja.getHoraFin()%>   </span>
                                     <span>Estado: <%=franja.getEstado()%></span>
-                                </div>
+                                
                                 <%if(franja.getEstado().equals("disponible")){%>   
                                 <input type="hidden" name="hora" value="<%=franja.getHoraInicio()%>">
                                 <input type="submit" class="btn btn-success crear" value="<%=tipoForm%>" name="accion" >
                                 <%}%>
                             </form>
+                            </div>
                                 <%}%>       
                        
                     </div>

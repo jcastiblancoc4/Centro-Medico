@@ -1,17 +1,28 @@
 body{
     background-image: url("../img/img/fondo.jpg") 
 }
-
-.contenedor{
-    border: solid #ffffff;
-    margin: 20px 200px auto 200px;
-    background: #ffffff;
-    
-    
+.titulo{
+margin: 10px auto 15px 5%;
+padding: 0;
+text-transform: uppercase;
+font-weight: 600;
 }
-
-.contenedor .boton{
-    margin: 5px auto auto 40%;
+.cuerpo{
+    background-image: url("../img/img/fondo.jpg"); 
+    box-sizing: border-box;
+    color: white;
+    margin: 0 10% 5% 25%;
+    display: inline-block;
+    width: 40%;
+    position: relative;
+    top: 40px;
+    text-align:center;
+    padding: 10px;
+    padding-left: 10px;
+}
+.boton{
+    margin: 5px;
+   
 }
             
         

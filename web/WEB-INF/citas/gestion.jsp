@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="styles/styles.css">
+        <link rel="stylesheet" type="text/css" href="styles/cita.css">
         <% 
         String tipoForm= (String) request.getAttribute("tipoFormulario");
         Cita cita = (Cita) request.getAttribute("cita");
@@ -26,19 +26,12 @@
         <% if(tipoForm.equals("gestionar")){
             int dias = (Integer) request.getAttribute("dias");
         %> 
-        <div class="container" style="background: #ffffff">
+        <div class="cuerpo">
             <h2>Gestion Cita Numero ${cita.id}</h2>
-            <div>
-                <form  action="CitasCtrl" method="POST" style="display:inline-block; padding: 10px">
-                    <input type="hidden" name="id" value="${cita.id}">
-                    <input type="submit" name="accion" value="actualizar"
-                            class="btn btn-danger btn-sm">
-                </form>
-            </div>
             <div>        
                 <form  action="CitasCtrl" method="POST" style="display:inline-block; padding: 10px">
                     <input type="hidden" name="id" value="${cita.id}">
-                    <input type="submit" name="accion" value="atender" class="btn btn-danger btn-sm">
+                    <input type="submit" name="accion" value="atender" class="btn btn-success btn-sm">
                 </form>
             </div>
             <div>        
@@ -51,7 +44,7 @@
         <%}
          if(tipoForm.equals("cancelar")){
         %>
-        <div class="container">
+        <div class="cuerpo">
         <h2>Desea Eliminar El Registro De La Cita ${cita.id} Del Sistema?</h2>
         
         <div>
@@ -60,21 +53,21 @@
                 <input type="submit" name="accion" value="Si"  class="btn btn-danger btn-sm">
             </form>
             <form  action="CitasCtrl" method="POST" style="display:inline-block; padding: 10px">
-                <input type="submit" name="accion" value="No"  class="btn btn-danger btn-sm">
+                <input type="submit" name="accion" value="No"  class="btn btn-success btn-sm">
             </form>
          </div>
          </div>
         <%}
             if(tipoForm.equals("atender")){
         %>
-        <div class="container" style="background:  #ffffff">
+        <div class="cuerpo">
         <h2>Atencion Cita ${cita.id}</h2>
         <div>
             <form  action="CitasCtrl" method="POST" style="display:inline-block; padding: 10px">
             
             <div class="item">
                         <h4>El Paciente Fue Atendido?</h4>
-                        <select class="custom-select" name="asistio" style="margin-left:20px; width: 100px ">
+                        <select class="custom-select" name="asistio" style="color: #000">
                             <option selected>Choose...</option>
                              <option value="Si">Si</option>
                              <option value="No">No</option>
@@ -85,7 +78,7 @@
                 <textarea type="text" class="form-control" style="margin-bottom: 20px" name="observacion"></textarea>
             </div>
             
-                <input type="submit" name="accion" value="terminar consulta"  class="btn btn-danger btn-sm">
+                <input type="submit" name="accion" value="terminar consulta"  class="btn btn-success btn-sm">
             </form>
          </div>
          </div>

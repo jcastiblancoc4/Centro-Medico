@@ -1,39 +1,24 @@
-   <!-- Fixed navbar -->
-   
-   <nav class="navbar navbar-inverse navbar-fixed-top" style="position: relative; margin:0; padding:0; ">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.jsp">My App</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          
-            <ul class="nav navbar-nav" >
-                <li><a href="PacientesCtrl">Pacientes</a></li>
-                <li><a href="DoctoresCtrl">Doctores</a></li>
-                <li><a href="EspecialidadesCtrl">Especialidades</a></li>
-                <li><a href="CitasCtrl">Citas</a></li>
-                <li><a href="HistorialCtrl">Historial</a></li>
-                
-            
-            <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Login</a></li> 
-            
-          </ul>
-        </div><!--/.nav-collapse -->
-        
-        
-        
-      </div>
-    </nav>
-   
  
- 
+<ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 20px">
+  <li class="nav-item">
+    <a class="nav-link" href="index.jsp" >Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="CitasCtrl" >Citas</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  href="PacientesCtrl" >Pacientes</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  href="DoctoresCtrl" >Doctores</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  href="EspecialidadesCtrl" >Especialidades</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  href="HistorialCtrl" >Historial</a>
+  </li>
+</ul>
+
  
   
-</div>

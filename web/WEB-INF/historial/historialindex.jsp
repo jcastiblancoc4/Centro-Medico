@@ -27,22 +27,24 @@
        
     </head>
     <body>
+        <div class="container" style="margin-top: 5px; ">  
         <jsp:include page="../includes/header.jsp"></jsp:include>
+        </div>
         
-          <div class=" contenedor">
+        <div class="cuerpo">
         <% if(tipoForm == null){%>
-            <h2 class="titulo">Seleccione una opcion de consulta del historial</h2>
+            <h2 class="titulo">Consultar</h2>
             <form class="boton" action="HistorialCtrl" method="GET">
-                <input type="submit" name="accion" value="Por Paciente" class="btn btn-warning btn-sm">       
+                <input type="submit" name="accion" value="Por Paciente" class="btn btn-success btn-sm" >       
             </form>
             <form class="boton" action="HistorialCtrl" method="GET">
-                <input type="submit" name="accion" value="Por Doctor" class="btn btn-warning btn-sm">       
+                <input type="submit" name="accion" value="Por Doctor" class="btn btn-success btn-sm" >       
             </form>
             <form class="boton" action="HistorialCtrl" method="GET">
-                <input type="submit" name="accion" value="Por Especialidad" class="btn btn-warning btn-sm">       
+                <input type="submit" name="accion" value="Por Especialidad" class="btn btn-success btn-sm">       
             </form >
             <form class="boton" action="HistorialCtrl" method="GET">
-                <input type="submit" name="accion" value="Por Fecha" class="btn btn-warning btn-sm"> 
+                <input type="submit" name="accion" value="Por Fecha" class="btn btn-success btn-sm" > 
                
             </form>
            
@@ -54,7 +56,7 @@
             <form action="HistorialCtrl" method="GET">
                     <div class="form-group item">
                         <h3>Seleccione El Paciente A Consutar</h3>
-                        <select class="custom-select" name="idPaciente" style="margin-left:20px; width: 100px ">
+                        <select class="custom-select" name="idPaciente" style="color: #000">
                             <option selected>Choose...</option>
                              <% for (Paciente paciente : pacientes) {%>
                                 <option value="<%=paciente.getId()%>"><%=paciente.getNombre()%> <%=paciente.getApellido()%></option>
@@ -73,7 +75,7 @@
             <form action="HistorialCtrl" method="GET">
                     <div class="form-group item">
                         <h3>Seleccione El Doctor A Consutar</h3>
-                        <select class="custom-select" name="idDoctor" style="margin-left:20px; width: 100px ">
+                        <select class="custom-select" name="idDoctor" style="color: #000 ">
                             <option selected>Choose...</option>
                              <% for (Doctor doctor : doctores) {%>
                                 <option value="<%=doctor.getId()%>"><%=doctor.getNombre()%> <%=doctor.getApellido()%></option>
@@ -92,7 +94,7 @@
             <form action="HistorialCtrl" method="GET">
                     <div class="form-group item">
                         <h3>Seleccione La Especialidad A Consutar</h3>
-                        <select class="custom-select" name="idEspecialidad" style="margin-left:20px; width: 100px ">
+                        <select class="custom-select" name="idEspecialidad" style="color: #000">
                             <option selected>Choose...</option>
                              <% for (Especialidad especialidad : especialidades) {%>
                                 <option value="<%=especialidad.getId()%>"><%=especialidad.getNombre()%></option>

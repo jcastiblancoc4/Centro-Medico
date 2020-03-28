@@ -1,0 +1,42 @@
+
+body{
+    background-image: url("../img/img/fondo.jpg");
+    color: #ffffff;
+        
+}
+
+
+.titulo{
+
+margin: 10px auto 15px 5%;
+padding: 0;
+text-transform: uppercase;
+font-weight: 600;
+}
+.nuevo {                
+margin-left: 5%;
+}
+
+.item{
+display: flex;
+margin: 15px auto 15px 5%;
+padding: 10px;
+}
+h4{
+text-transform: uppercase;
+font-weight: 600;
+}
+.cuerpo{
+        background-image: url("../img/img/fondo.jpg");
+	box-sizing: border-box;
+	color: white;
+        display: inline-block;
+	margin: 0 10% 5% 10%;
+	display: inline-block;
+	width: 75%;
+	position: relative;
+	top: 40px;
+        text-align:center;
+	padding: 10px;
+	padding-left: 10px;
+}

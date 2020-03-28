@@ -1,0 +1,37 @@
+body{
+    background-image: url("../img/img/fondo.jpg");
+    color: #ffffff;
+        
+}
+.titulo{
+    display:inline-block;
+    margin: 3% auto 20px 2%;
+    padding: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.nuevo{                
+    display:inline-block;
+    margin-left: 40%;
+}
+.item{
+    margin-left: 2%;
+    margin-bottom: 30px;
+}
+h4{
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.cuerpo{
+    background-image: url("../img/img/fondo.jpg");
+    box-sizing: border-box;
+    color: white;
+    margin: 0 10% 5% 10%;
+    display: inline-block;
+    width: 75%;
+    position: relative;
+    top: 40px;
+    padding: 10px;
+    padding-left: 10px;
+}
+

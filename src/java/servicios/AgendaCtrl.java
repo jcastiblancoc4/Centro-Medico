@@ -57,18 +57,13 @@ public class AgendaCtrl {
             Time finFranja = new Time(horaInicio, minutoInicio, segundoInicio);
             franja.setHoraFin(finFranja);
             
-            int cantidadCitas = CitaJDBC.instance().selectFecha(fecha, inicioFranja);
+            int cantidadCitas = CitaJDBC.instance().selectFecha(idDoctor, fecha, inicioFranja);
             if(cantidadCitas==0){
                 franja.setEstado("disponible");
             }else{
                 franja.setEstado("asignada");
             }
             horario.add(franja);
-//            System.out.println("doctor "+ franja.getDoctor());
-//            System.out.println("inicio "+ franja.getHoraInicio());
-//            System.out.println("fin "+ franja.getHoraFin());
-//            System.out.println("estado "+ franja.getEstado());
-//            System.out.println("_______________");
         }
         
         return horario;

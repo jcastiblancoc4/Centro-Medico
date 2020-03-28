@@ -40,7 +40,7 @@ public class CitaJDBC {
             java.sql.Date fechaSQL = new java.sql.Date(cita.getFecha().getTime());
             stmt.setDate(index++, fechaSQL);
             stmt.setString(index++, cita.getEstado());
-            stmt.setBoolean(index++, cita.getAsistio());
+            stmt.setString(index++, cita.getAsistio());
             stmt.setTime(index++, cita.getHora());
             row = stmt.executeUpdate();
         } catch (SQLException e) {
@@ -71,7 +71,7 @@ public class CitaJDBC {
                 cita.setIdDoctor(rs.getInt(4));
                 cita.setFecha(rs.getDate(5));
                 cita.setEstado(rs.getString(6));
-                cita.setAsistio(rs.getBoolean(7));
+                cita.setAsistio(rs.getString(7));
                 cita.setHora(rs.getTime(8));
                 citas.add(cita);
             }
@@ -108,7 +108,7 @@ public class CitaJDBC {
                 cita.setIdDoctor(rs.getInt(4));
                 cita.setFecha(rs.getDate(5));
                 cita.setEstado(rs.getString(6));
-                cita.setAsistio(rs.getBoolean(7));
+                cita.setAsistio(rs.getString(7));
                 cita.setHora(rs.getTime(8));
                 citas.add(cita);
             }
@@ -142,7 +142,7 @@ public class CitaJDBC {
                 cita.setIdDoctor(rs.getInt(4));
                 cita.setFecha(rs.getDate(5));
                 cita.setEstado(rs.getString(6));
-                cita.setAsistio(rs.getBoolean(7));
+                cita.setAsistio(rs.getString(7));
                 cita.setHora(rs.getTime(8));
                 citas.add(cita);
             }
@@ -177,7 +177,7 @@ public class CitaJDBC {
                 cita.setIdDoctor(rs.getInt(4));
                 cita.setFecha(rs.getDate(5));
                 cita.setEstado(rs.getString(6));
-                cita.setAsistio(rs.getBoolean(7));
+                cita.setAsistio(rs.getString(7));
                 cita.setHora(rs.getTime(8));
                 citas.add(cita);
             }
@@ -212,7 +212,7 @@ public class CitaJDBC {
                 cita.setIdDoctor(rs.getInt(4));
                 cita.setFecha(rs.getDate(5));
                 cita.setEstado(rs.getString(6));
-                cita.setAsistio(rs.getBoolean(7));
+                cita.setAsistio(rs.getString(7));
                 cita.setHora(rs.getTime(8));
                 citas.add(cita);
             }
@@ -243,7 +243,7 @@ public class CitaJDBC {
             stmt.setInt (index++, cita.getIdDoctor());
             stmt.setDate (index++, (java.sql.Date) cita.getFecha());
             stmt.setString (index++, cita.getEstado());
-            stmt.setBoolean (index++, cita.getAsistio());
+            stmt.setString (index++, cita.getAsistio());
             row = stmt.executeUpdate();
             mensaje = "Se actualizo" + row + "registro(s), satisfactoriamente";
         } catch (SQLException e) {
@@ -275,7 +275,7 @@ public class CitaJDBC {
                 cita.setIdDoctor(rs.getInt(4));
                 cita.setFecha(rs.getDate(5));
                 cita.setEstado(rs.getString(6));
-                cita.setAsistio(rs.getBoolean(7));
+                cita.setAsistio(rs.getString(7));
                 cita.setHora(rs.getTime(8));
                }
          }catch(SQLException e){
@@ -290,8 +290,8 @@ public class CitaJDBC {
          return cita;
     }
      
-    private final String SQL_VALIDAR_A = "SELECT COUNT(*) FROM cita WHERE fecha=? AND hora=? and (estado='efectiva' OR estado='agendada')";
-    public int selectFecha(Date fecha, Time hora){
+    private final String SQL_VALIDAR_A = "SELECT COUNT(*) FROM cita WHERE fecha=? AND hora=? AND id_doctor=? AND (estado='efectiva' OR estado='agendada')";
+    public int selectFecha(int idDoctor, Date fecha, Time hora){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs= null;
@@ -302,6 +302,7 @@ public class CitaJDBC {
             java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
             stmt.setDate(1, fechaSQL);
             stmt.setTime(2, hora);
+            stmt.setInt(3, idDoctor);
             rs = stmt.executeQuery();
             while(rs.next()){
                 cantidadCitas = rs.getInt(1);
@@ -345,6 +346,30 @@ public class CitaJDBC {
          return cantidadCitas;
     }
     
+    private final String SQL_CANCELAR = "UPDATE cita SET estado=?, asistio=? WHERE id=?;";
+    public String cancelarCita(int idCita) {
+        String mensaje = "";
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int row = 0;
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_CANCELAR);
+            int index = 1; 
+            stmt.setString (index++, "Cancelada");
+            stmt.setString (index++, "No");
+            stmt.setInt(index++, idCita);
+            row = stmt.executeUpdate();
+            mensaje = "Se Cancelo" + row + "registro(s), satisfactoriamente";
+        } catch (SQLException e) {
+            System.out.println(  mensaje = "Error: " + e.getMessage());
+
+        } finally {
+            Conexion.closed(stmt);
+            Conexion.closed(conn);
+        }
+        return mensaje;
+    }
     
      
      private final String SQL_DELETE = "DELETE FROM cita WHERE id=?";
@@ -368,15 +393,47 @@ public class CitaJDBC {
       
         return mensaje;        
     }
-    
-     private static CitaJDBC citaJDBC;
-    
+        
+    private final String SQL_FINALIZAR = "UPDATE cita SET estado=?, asistio=?, observacion=? WHERE id=?;";
+     public String finalizarCita(int idCita, String asistio, String observacion) {
+        String mensaje = "";
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int row = 0;
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_FINALIZAR);
+            int index = 1; 
+            stmt.setString (index++, "Efectiva");
+            stmt.setString (index++, asistio);
+            stmt.setString (index++, observacion);
+            stmt.setInt(index++, idCita);
+            row = stmt.executeUpdate();
+            mensaje = "Se Finalizo " + row + " La Consulta Satisfactoriamente";
+        } catch (SQLException e) {
+            System.out.println(  mensaje = "Error: " + e.getMessage());
+
+        } finally {
+            Conexion.closed(stmt);
+            Conexion.closed(conn);
+        }
+        
+        return mensaje;
+        
+    }
+        
+        
+    private static CitaJDBC citaJDBC;
     public static CitaJDBC instance() {
         if (citaJDBC == null) {
             citaJDBC = new CitaJDBC();
         }
         return citaJDBC;
     }
+
+   
+
+    
 
     
     

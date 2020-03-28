@@ -93,7 +93,7 @@ public class PacienteJDBC {
     }
     
     
-     private final String SQL_SELECT_P = "select* from persona where tipopersona='paciente' and numerocitas<=2";
+    private final String SQL_SELECT_P = "select* from persona where tipopersona='paciente' and numerocitas<=2";
     public List<Paciente> selectPacientes() throws IOException {
         Connection conn = null;
         PreparedStatement stmt = null;

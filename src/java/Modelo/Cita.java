@@ -23,7 +23,7 @@ public class Cita {
     private Date fecha;
     private Time hora;
     private String estado;
-    private Boolean asistio;
+    private String asistio;
     
     private Paciente paciente1;
     private String paciente;
@@ -42,7 +42,7 @@ public class Cita {
     private String celularDoctor;
     
     
-    public Cita(int id, int id_paciente, int id_especialidad, int id_doctor, Date fecha, Time hora, String estado, Boolean asistio) {
+    public Cita(int id, int id_paciente, int id_especialidad, int id_doctor, Date fecha, Time hora, String estado, String asistio) {
         this.id = id;
         this.idPaciente = id_paciente;
         this.idEspecialidad = id_especialidad;
@@ -53,7 +53,7 @@ public class Cita {
         this.asistio = asistio;
     }
 
-    public Cita(int id_paciente, int id_especialidad, int id_doctor, Date fecha, Time hora, String estado, Boolean asistio) {
+    public Cita(int id_paciente, int id_especialidad, int id_doctor, Date fecha, Time hora, String estado, String asistio) {
         this.idPaciente = id_paciente;
         this.idEspecialidad = id_especialidad;
         this.idDoctor = id_doctor;
@@ -95,7 +95,7 @@ public class Cita {
         return estado;
     }
 
-    public Boolean getAsistio() {
+    public String getAsistio() {
         return asistio;
     }
 
@@ -127,7 +127,7 @@ public class Cita {
         this.estado = estado;
     }
 
-    public void setAsistio(Boolean asistio) {
+    public void setAsistio(String asistio) {
         this.asistio = asistio;
     }
 

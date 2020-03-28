@@ -15,7 +15,6 @@ import Modelo.Doctor;
 import Modelo.Especialidad;
 import Modelo.Paciente;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,6 +48,9 @@ public class CitasCtrl extends HttpServlet {
     int valor;
     String doctor;
     String cedulaDoctor;
+    
+    Cita cita;
+     int idCita;
   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -81,11 +83,15 @@ public class CitasCtrl extends HttpServlet {
             } catch (ParseException ex) {
             }
         }else{
-            if(accion.equals("actualizar")){
-                
+            if(accion.equals("eliminar")){
+                eliminarCita(request, response);
             }else{
-                if(accion.equals("eliminar")){
-                    eliminarCita(request, response);
+                if(accion.equals("gestionar")|| accion.equals("cancelar")|| accion.equals("Si") || accion.equals("No") || accion.equals("atender") || accion.equals("terminar consulta") ){
+                    try {
+                        gestionarCita(request, response, accion);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(CitasCtrl.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
             
@@ -154,7 +160,6 @@ public class CitasCtrl extends HttpServlet {
                         request.setAttribute("doctor", doctor);
                         request.setAttribute("cedulaDoctor", cedulaDoctor);
                         String fechaA = request.getParameter("fecha");
-                        
                         fecha=new Date();
                         try{
                         fecha = new SimpleDateFormat("yyyy-MM-dd").parse(fechaA);
@@ -170,8 +175,8 @@ public class CitasCtrl extends HttpServlet {
                             hora =java.sql.Time.valueOf(request.getParameter("hora"));
                             if(validarEspecialidad(idPaciente, idEspecialidad)==1){
                                 if(validarFecha(fecha)==1){
-                                    System.out.println(">>>>>>>>> "+fecha);
-                                    Cita cita = new Cita(idPaciente, idEspecialidad, idDoctor, fecha, hora, "agendada", Boolean.FALSE);
+                                    
+                                    Cita cita = new Cita(idPaciente, idEspecialidad, idDoctor, fecha, hora, "agendada", "Pendiente");
                                     String mensaje=CitaJDBC.instance().insert(cita);
                                     PacienteJDBC.instance().aumentarContador(idPaciente);
                                     response.sendRedirect("CitasCtrl");
@@ -202,7 +207,6 @@ public class CitasCtrl extends HttpServlet {
         String mensaje = CitaJDBC.instance().delete(id);
         request.setAttribute("mensaje", mensaje);
         response.sendRedirect("CitasCtrl");
-        
     }
 
     private int validarEspecialidad(int idPaciente, int idEspecialidad) {
@@ -228,6 +232,59 @@ public class CitasCtrl extends HttpServlet {
                 return 0;
             }
         }
+    }
+
+    private void gestionarCita(HttpServletRequest request, HttpServletResponse response, String accion) throws ServletException, IOException, ParseException {
+        if(accion.equals("gestionar")){
+            idCita = Integer.parseInt(request.getParameter("id"));
+            cita = CitaJDBC.instance().selectCita(idCita);
+            request.setAttribute("dias", validarCancelacion(cita.getFecha()));
+            request.setAttribute("cita", cita);
+            request.setAttribute("tipoFormulario", "gestionar");
+            request.getRequestDispatcher("WEB-INF/citas/gestion.jsp").forward(request, response);
+        }else{
+            if(accion.equals("cancelar")){
+            CitaJDBC.instance().cancelarCita(idCita);
+            request.setAttribute("cita", cita);
+            request.setAttribute("tipoFormulario", "cancelar");
+            request.getRequestDispatcher("WEB-INF/citas/gestion.jsp").forward(request, response);
+            }else{
+                 if(accion.equals("Si")){
+                    request.setAttribute("cita", cita); 
+                    eliminarCita(request, response);
+                 }else {
+                    if(accion.equals("No")){
+                    request.setAttribute("cita", cita); 
+                    response.sendRedirect("CitasCtrl");
+                    }else {
+                         if(accion.equals("atender")){
+                            request.setAttribute("cita", cita);
+                            request.setAttribute("tipoFormulario", "atender");
+                            request.getRequestDispatcher("WEB-INF/citas/gestion.jsp").forward(request, response); 
+                         }else {
+                             if(accion.equals("terminar consulta")){
+                                
+                                String asistio = request.getParameter("asistio");
+                                String observacion = request.getParameter("observacion");
+                                System.out.println(  ">>>>>>>>>>>>>>>>>> " + asistio + " "+ observacion);
+                                CitaJDBC.instance().finalizarCita(idCita, asistio,observacion);
+                                response.sendRedirect("CitasCtrl");
+                             }
+                         }
+                    }
+                 }
+            }
+        }
+    }
+
+    private int validarCancelacion(Date fechaCita) throws ParseException {
+        Date fechaActual = new Date();
+        SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaSistema = formateador.format(fechaActual);  
+        Date hoy = formateador.parse(fechaSistema);
+        int dias=(int) ((fechaCita.getTime()-hoy.getTime())/86400000);
+        
+        return dias;
     }
 
 }

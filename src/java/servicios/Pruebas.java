@@ -26,25 +26,18 @@ public class Pruebas {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ParseException {
-          Date fechaActual = new Date();
-          SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
-          String fechaSistema=formateador.format(fechaActual);
-          System.out.println(fechaSistema);
-          Date fecha1 =  formateador.parse(fechaSistema);
-          
-         String fechaP = "2020-01-10";
-          Date fecha2 = formateador.parse(fechaP);
-          
-          if ( fecha1.before(fecha2) ){
-        System.out.print("La Fecha 1 es menor ");
-    }else{
-     if ( fecha2.before(fecha1) ){
-         System.out.print( "La Fecha 1 es Mayor ");
-     }else{
-      System.out.print("Las Fechas Son iguales ");
-     } 
-    }
-          
+
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+ 
+		Date fechaInicial=dateFormat.parse("2020-03-27");
+		Date fechaFinal=dateFormat.parse("2020-03-30");
+ 
+		int dias=(int) ((fechaFinal.getTime()-fechaInicial.getTime())/86400000);
+ 
+		System.out.println("Hay "+dias+" dias de diferencia");
+	
+
     }
     
     

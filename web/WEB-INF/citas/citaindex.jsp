@@ -1,3 +1,5 @@
+<%@page import="Modelo.Cita"%>
+<%@page import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -35,6 +37,9 @@
                 
             }
         </style>
+        <%
+            List<Cita> citas = (List<Cita>) request.getAttribute("citas");
+            %>
         
     </head>
     
@@ -48,44 +53,46 @@
                </div>
             </form>
              <div class="row" >
-                   <c:forEach items="${citas}" var="cita">
+                   <%for(Cita cita: citas){%>
                         <div class="col-sm-4 item">
                             <div class="card ">
                                 <div class="card-body">
                                     
-                                    <h4 class="card-title">id cita: ${cita.id}</h4>
+                                    <h4 class="card-title">id cita: <%=cita.getId()%></h4>
                                     
-                                    <h5 class="card-text" style="">Nombre Paciente: ${cita.paciente}</h5>
-                                    <h5 class="card-text" style="">Cedula Paciente: ${cita.cedulaPaciente}</h5>
-                                    <h5 class="card-text" style="">Numero de Celular Paciente: ${cita.celularPaciente}</h5>
+                                    <h5 class="card-text" style="">Nombre Paciente: <%=cita.getPaciente()%></h5>
+                                    <h5 class="card-text" style="">Cedula Paciente: <%=cita.getCedulaPaciente()%></h5>
+                                    <h5 class="card-text" style="">Numero de Celular Paciente:  <%=cita.getCelularPaciente()%></h5>
                                     
                                     
-                                    <h5 class="card-text" style="">Especialidad de Cita: ${cita.especialidad}</h5>
-                                    <h5 class="card-text" style="">Duracion de Cita: ${cita.duracionConsulta}</h5>
-                                    <h5 class="card-text" style="">Costo de Cita: $${cita.valorConsulta}</h5>
+                                    <h5 class="card-text" style="">Especialidad de Cita:  <%=cita.getEspecialidad()%></h5>
+                                    <h5 class="card-text" style="">Duracion de Cita: <%=cita.getDuracionConsulta()%></h5>
+                                    <h5 class="card-text" style="">Costo de Cita: $ <%=cita.getValorConsulta()%></h5>
                                     
-                                    <h5 class="card-text" style="">Doctor: ${cita.doctor}</h5>
-                                    <h5 class="card-text" style="">Cedula Doctor: ${cita.cedulaDoctor}</h5>
-                                    <h5 class="card-text" style="">Numero de Celular Doctor ${cita.celularDoctor}</h5>
+                                    <h5 class="card-text" style="">Doctor:  <%=cita.getDoctor()%></h5>
+                                    <h5 class="card-text" style="">Cedula Doctor:  <%=cita.getCedulaDoctor()%></h5>
+                                    <h5 class="card-text" style="">Numero de Celular Doctor  <%=cita.getCelularDoctor()%></h5>
                                     
-                                    <h5 class="card-text" style="">fecha: ${cita.fecha}</h5>
-                                    <h5 class="card-text" style="">hora: ${cita.hora}</h5>
-                                    <h5 class="card-text" style="">estado: ${cita.estado}</h5>
-                                    <h5 class="card-text" style="">asistio: ${cita.asistio}</h5>
+                                    <h5 class="card-text" style="">fecha: <%=cita.getFecha()%></h5>
+                                    <h5 class="card-text" style="">hora: <%=cita.getHora()%></h5>
+                                    <h5 class="card-text" style="">estado: <%=cita.getEstado()%></h5>
+                                    <h5 class="card-text" style="">asistio:  <%=cita.getAsistio()%></h5>
                                     
-                                    <form action="CitasCtrl" method="GET" style="display:inline-block">
-                                        <input type="hidden" name="id" value="${cita.id}">
-                                        
-                                        <input type="submit" name="accion" value="editar" class="btn btn-warning btn-sm">       
+                                    <form action="CitasCtrl" method="POST" style="display:inline-block">
+                                        <input type="hidden" name="id" value="<%=cita.getId()%>">
+                                        <input type="submit" name="accion" value="eliminar"  <%if(cita.getEstado().equalsIgnoreCase("Agendada")|| cita.getAsistio().equalsIgnoreCase("pendiente")){%> disabled="" <%}%>
+                                               class="btn btn-danger btn-sm">       
                                     </form>
                                     <form  action="CitasCtrl" method="POST" style="display:inline-block">
-                                        <input type="hidden" name="id" value="${cita.id}">
-                                        <input type="submit" name="accion" value="eliminar" class="btn btn-danger btn-sm">
+                                        <input type="hidden" name="id" value="<%=cita.getId()%>">
+                                        <input type="submit" name="accion" value="gestionar"  <%if(cita.getEstado().equals("Cancelada")||
+                                                cita.getAsistio().equals("Si")||cita.getAsistio().equals("No"))
+                                                {%> disabled="true" <%}%> class="btn btn-warning btn-sm">
                                     </form>
                                 </div>           
                             </div>  
                         </div>
-                   </c:forEach>
+                   <%}%>
                </div>
         </div>
     </body>

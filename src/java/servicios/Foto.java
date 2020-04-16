@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servicios;
 
 import java.io.File;
@@ -17,21 +12,18 @@ import java.io.OutputStream;
  * @author jpcas
  */
 public class Foto {
-    
-    
+
     public String rutaDestinoFoto(String nombre, String carpeta) {
         String rutaProyecto = this.getClass().getResource("").getPath();
         rutaProyecto = rutaProyecto.substring(0, rutaProyecto.length() - 37);
         String rutaFoto = rutaProyecto + carpeta + nombre + ".png";
         return rutaFoto;
     }
-    
+
     public String copiarPegarArchivo(String rutaOrigen, String rutaDestino) {
         String mensaje = "";
         File origen = new File(rutaOrigen);
         File destino = new File(rutaDestino);
-        System.out.print("origen >> "+rutaOrigen);
-        System.out.print("origen >> "+rutaDestino);
         try {
             InputStream in = new FileInputStream(origen);
             OutputStream out = new FileOutputStream(destino);
@@ -51,10 +43,10 @@ public class Foto {
     public void eliminarFoto(String ruta) {
         File imagen = new File(ruta);
         imagen.delete();
-        System.out.println("Aqui >>>>>>>>>>>>>>>>" + ruta);
     }
 
     private static Foto foto;
+
     public static Foto instance() {
         if (foto == null) {
             foto = new Foto();

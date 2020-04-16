@@ -2,8 +2,7 @@ package Modelo;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
-import org.hibernate.validator.internal.util.logging.Log;
+
 
 public class Especialidad {
 
